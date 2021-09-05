@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text,Image, StyleSheet } from 'react-native'
+import { View, Text,Image, StyleSheet, ScrollView} from 'react-native'
 import { TextInput } from 'react-native-gesture-handler';
 
 
@@ -13,18 +13,68 @@ export class Register extends Component {
     constructor(props)
     {
         super(props);
-        this.state={Name:'',Email:'',Password:''}
+        this.state={username:'',email:'',password:'',firstName:'',lastName:'',gender:'',phone:'',doB:''}
 
     }
+    //checkinput = (Phone) =>{
+       // if (/^\d+$/.test(Phone)) {
+          //  this.setState({
+           //   Phone: Phone
+          //  });
+          //}
+    //}
     onSignUp=()=>{
-        var Name = this.state.Name;
-        var Email = this.state.Email;
-        var Password = this.state.Password;
-        if(Name.length==0 || Email.length==0|| Password.length==0){
+        var username = this.state.username;
+        var email = this.state.email;
+        var password = this.state.password;
+        var firstName = this.state.firstName;
+        var lastName = this.state.lastName;
+        var gender = this.state.gender;
+        var phone = this.state.phone;
+        var doB = this.state.doB;
+        if(username.length==0 || email.length==0 || password.length==0 || firstName.length==0 || lastName.length==0
+            || gender.length==0 || phone.length==0 || doB.length==0){
             alert("Required Field is Missing")
         }
+        
         else{
-            alert("Fecth API code com here")
+            var LoginAPIURL="http://api.zbioggg.com/api/register";
+            var headers={'Accept':'application/json',
+                           'Content-Type':'application/json' };
+            var Data={
+               'username':username,
+               'email':email,
+               'password':password,
+               'firstName':firstName,
+               'lastName':lastName,
+               'gender':gender,
+               'phone':phone,
+               'doB':doB
+
+            };
+
+            fetch(LoginAPIURL,
+                {
+                    method:'POST',
+                     headers:headers,
+                    body: JSON.stringify(Data)
+                }
+                )
+                .then((response)=>response.json())
+                .then((response)=>
+                    {
+                        if((response.success))
+                        {
+                            
+                            this.props.navigation.navigate("Login")
+                            
+                        }
+                    })
+                    .catch((error)=>
+                    {
+                        alert("error"+error);
+                    })
+        
         }
         }
 
@@ -37,7 +87,7 @@ export class Register extends Component {
                     style={styles.imgstyle}
                 source={require('../../img/logo.png')}
             />
-                
+                <ScrollView>
                 <View style={styles.sectionStyle}>
                     <Image
                     source={
@@ -47,11 +97,96 @@ export class Register extends Component {
                     style={styles.imageStyle}
                     />
                     <TextInput
-                    placeholder={"Name"}
+                    placeholder={"UserName"}
                     placeholderTextColor={"black"}
                     underlineColorAndroid="transparent"
                     style={styles.txtStyle}
-                    onChangeText={Name=>this.setState({Name})}
+                    onChangeText={username=>this.setState({username})}
+                    />
+                    </View>
+                    <View style={styles.sectionStyle}>
+                    <Image
+                    source={
+                    require('../../img/name.png')
+                    
+                        }
+                    style={styles.imageStyle}
+                    />
+                    <TextInput
+                    placeholder={"FirstName"}
+                    placeholderTextColor={"black"}
+                    underlineColorAndroid="transparent"
+                    style={styles.txtStyle}
+                    onChangeText={firstName=>this.setState({firstName})}
+                    />
+                    </View>
+                    <View style={styles.sectionStyle}>
+                    <Image
+                    source={
+                    require('../../img/name.png')
+                    
+                        }
+                    style={styles.imageStyle}
+                    />
+                    <TextInput
+                    placeholder={"LastName"}
+                    placeholderTextColor={"black"}
+                    underlineColorAndroid="transparent"
+                    style={styles.txtStyle}
+                    onChangeText={lastName=>this.setState({lastName})}
+                    />
+                    </View>
+                    <View style={styles.sectionStyle}>
+                    <Image
+                    source={
+                    require('../../img/sex.png')
+                    
+                        }
+                    style={styles.imageStyle}
+                    />
+                    <TextInput
+                    placeholder={"Gender"}
+                    placeholderTextColor={"black"}
+                    underlineColorAndroid="transparent"
+                    style={styles.txtStyle}
+                    onChangeText={gender=>this.setState({gender})}
+                    />
+                    </View>
+                    <View style={styles.sectionStyle}>
+                    <Image
+                    source={
+                    require('../../img/phone.png')
+                    
+                        }
+                    style={styles.imageStyle}
+                    />
+                    <TextInput
+                    placeholder={"Phone"}
+                    placeholderTextColor={"black"}
+                    underlineColorAndroid="transparent"
+                    style={styles.txtStyle}
+                    keyboardType='numeric'
+                    onChangeText={phone => this.setState({phone})}
+                        
+                    maxLength={10}
+                    />
+                    </View>
+                    <View style={styles.sectionStyle}>
+                    <Image
+                    source={
+                    require('../../img/dob.png')
+                    
+                        }
+                    style={styles.imageStyle}
+                    />
+                    <TextInput
+                    placeholder={"Dob dd/mm/yyyy"}
+                    placeholderTextColor={"black"}
+                    underlineColorAndroid="transparent"
+                    style={styles.txtStyle}
+                    numeric
+                    onChangeText={doB=>this.setState({doB})}
+                    options={{format: 'DD-MM-YYYY HH:mm:ss'}}
                     />
                     </View>
                     <View style={styles.sectionStyle}>
@@ -67,7 +202,7 @@ export class Register extends Component {
                     placeholderTextColor={"black"}
                     underlineColorAndroid="transparent"
                     style={styles.txtStyle}
-                    onChangeText={Email=>this.setState({Email})}
+                    onChangeText={email=>this.setState({email})}
                     />
                     </View>
                     <View style={styles.sectionStyle}>
@@ -83,7 +218,7 @@ export class Register extends Component {
                     placeholderTextColor={"black"}
                     underlineColorAndroid="transparent"
                     style={styles.txtStyle}
-                    onChangeText={Password=>this.setState({Password})}
+                    onChangeText={password=>this.setState({password})}
                     secureTextEntry={true}
                     />
                     </View>
@@ -93,6 +228,7 @@ export class Register extends Component {
                     onPress={this.onSignUp}
                     title="Sign Up"
                 />
+                </ScrollView>
             </View>
         )
     }
@@ -104,7 +240,7 @@ const styles=StyleSheet.create({
     {
         flex:1,
         padding:20,
-        marginTop:50,
+        marginTop:10,
     },
 
     txtStyle:

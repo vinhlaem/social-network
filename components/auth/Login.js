@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { View, Text,TextInput,Image, StyleSheet } from 'react-native'
 //import { TextInput } from 'react-native-gesture-handler';
-
-
+//import { StackNavigator } from 'react-navigation';
 
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from 'react-native-elements/dist/input/Input';
 
 export class Login extends Component {
+      
 
     constructor(props)
     {
@@ -43,7 +43,8 @@ export class Login extends Component {
                     {
                         if((response.success))
                         {
-                            alert(response.token);
+                            this.props.navigation.navigate("Home")
+                            
                         }else{
                             alert("username or password is incorrect")
                         }
