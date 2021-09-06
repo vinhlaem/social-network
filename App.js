@@ -7,7 +7,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import LandingScreen from './components/auth/Landing';
 import RegisterScreen from './components/auth/Register';
 import LoginScreen from './components/auth/Login';
-import HomeScreen from './components/auth/Home';
+import HomeScreen from './components/Home';
+import { Provider } from 'react-redux';
+
 
 
 
@@ -38,6 +40,7 @@ export class App extends Component {
       
       
     );
+    
   }
 }
 

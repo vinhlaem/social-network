@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text,TextInput,Image, StyleSheet } from 'react-native'
+import { View, Text,TextInput,Image, StyleSheet,TouchableOpacity } from 'react-native'
 //import { TextInput } from 'react-native-gesture-handler';
 //import { StackNavigator } from 'react-navigation';
 
@@ -34,7 +34,7 @@ export class Login extends Component {
             fetch(LoginAPIURL,
                 {
                     method:'POST',
-                     headers:headers,
+                    headers:headers,
                     body: JSON.stringify(Data)
                 }
                 )
@@ -79,7 +79,7 @@ export class Login extends Component {
                     />
                     <TextInput
                     placeholder={"Username"}
-                    placeholderTextColor={"black"}
+                    placeholderTextColor={"#a9a9a9"}
                     underlineColorAndroid="transparent"
                     style={styles.txtStyle}
                     onChangeText={username=>this.setState({username})}
@@ -96,7 +96,7 @@ export class Login extends Component {
                     />
                     <TextInput
                     placeholder={"Password"}
-                    placeholderTextColor={"black"}
+                    placeholderTextColor={"#a9a9a9"}
                     underlineColorAndroid="transparent"
                     style={styles.txtStyle}
                     onChangeText={password=>this.setState({password})}
@@ -104,12 +104,11 @@ export class Login extends Component {
                     />
                     </View>
                 
-                <Button
-                    type="clear"
-                    onPress={this.onLogin}
-                    
-                    title="Login"
-                />
+                    <TouchableOpacity style={styles.btn} onPress={this.onLogin}>
+                    <Text style={styles.text} >
+                        Login
+                    </Text>
+                </TouchableOpacity>
             </View>
         )
     }
@@ -153,6 +152,22 @@ const styles=StyleSheet.create({
         height: 40,
         borderRadius: 5,
         margin: 10,
+    },
+    btn:{
+        alignItems: "center",
+        backgroundColor: "#5ac618",
+        padding: 10,
+        borderRadius: 5,
+        borderColor: '#000',
+        margin: 10
+    
+    },
+    text:{
+        color:'#fff',
+        fontFamily:'sans-serif',
+        fontSize: 15,
+        fontWeight: "bold"
+        
     }
     
 });

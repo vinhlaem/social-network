@@ -1,15 +1,12 @@
 import React, { Component } from 'react'
 import { Text } from 'react-native-elements'
 
-export class Home extends Component {
+export class Feed extends Component {
     render() {
         return (
-            
-                <Text>HomeScreen</Text>
-            
+            <Text>FEED</Text>
         )
     }
 }
 
-export default Home
-
+export default Feed

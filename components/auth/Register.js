@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import { View, Text,Image, StyleSheet, ScrollView} from 'react-native'
+import { View, Text,Image, StyleSheet, ScrollView,Button,TouchableOpacity} from 'react-native'
 import { TextInput } from 'react-native-gesture-handler';
 
 
 
-import { Button } from 'react-native-elements';
+//import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from 'react-native-elements/dist/input/Input';
+import { fonts } from 'react-native-elements/dist/config';
 
 export class Register extends Component {
 
@@ -40,7 +41,7 @@ export class Register extends Component {
         else{
             var LoginAPIURL="http://api.zbioggg.com/api/register";
             var headers={'Accept':'application/json',
-                           'Content-Type':'application/json' };
+                           'Content-Type':'application/json'};
             var Data={
                'username':username,
                'email':email,
@@ -98,7 +99,7 @@ export class Register extends Component {
                     />
                     <TextInput
                     placeholder={"UserName"}
-                    placeholderTextColor={"black"}
+                    placeholderTextColor={"#a9a9a9"}
                     underlineColorAndroid="transparent"
                     style={styles.txtStyle}
                     onChangeText={username=>this.setState({username})}
@@ -114,7 +115,7 @@ export class Register extends Component {
                     />
                     <TextInput
                     placeholder={"FirstName"}
-                    placeholderTextColor={"black"}
+                    placeholderTextColor={"#a9a9a9"}
                     underlineColorAndroid="transparent"
                     style={styles.txtStyle}
                     onChangeText={firstName=>this.setState({firstName})}
@@ -130,7 +131,7 @@ export class Register extends Component {
                     />
                     <TextInput
                     placeholder={"LastName"}
-                    placeholderTextColor={"black"}
+                    placeholderTextColor={"#a9a9a9"}
                     underlineColorAndroid="transparent"
                     style={styles.txtStyle}
                     onChangeText={lastName=>this.setState({lastName})}
@@ -146,7 +147,7 @@ export class Register extends Component {
                     />
                     <TextInput
                     placeholder={"Gender"}
-                    placeholderTextColor={"black"}
+                    placeholderTextColor={"#a9a9a9"}
                     underlineColorAndroid="transparent"
                     style={styles.txtStyle}
                     onChangeText={gender=>this.setState({gender})}
@@ -162,7 +163,7 @@ export class Register extends Component {
                     />
                     <TextInput
                     placeholder={"Phone"}
-                    placeholderTextColor={"black"}
+                    placeholderTextColor={"#a9a9a9"}
                     underlineColorAndroid="transparent"
                     style={styles.txtStyle}
                     keyboardType='numeric'
@@ -181,7 +182,7 @@ export class Register extends Component {
                     />
                     <TextInput
                     placeholder={"Dob dd/mm/yyyy"}
-                    placeholderTextColor={"black"}
+                    placeholderTextColor={"#a9a9a9"}
                     underlineColorAndroid="transparent"
                     style={styles.txtStyle}
                     numeric
@@ -199,7 +200,7 @@ export class Register extends Component {
                     />
                     <TextInput
                     placeholder={"Email"}
-                    placeholderTextColor={"black"}
+                    placeholderTextColor={"#a9a9a9"}
                     underlineColorAndroid="transparent"
                     style={styles.txtStyle}
                     onChangeText={email=>this.setState({email})}
@@ -215,20 +216,23 @@ export class Register extends Component {
                     />
                     <TextInput
                     placeholder={"Password"}
-                    placeholderTextColor={"black"}
+                    placeholderTextColor={"#a9a9a9"}
                     underlineColorAndroid="transparent"
                     style={styles.txtStyle}
                     onChangeText={password=>this.setState({password})}
                     secureTextEntry={true}
                     />
                     </View>
+               
                 
-                <Button
-                    type="clear"
-                    onPress={this.onSignUp}
-                    title="Sign Up"
-                />
+                    
+                
                 </ScrollView>
+                <TouchableOpacity style={styles.btn} onPress={this.onSignUp}>
+                    <Text style={styles.text} >
+                        SignUp
+                    </Text>
+                </TouchableOpacity>
             </View>
         )
     }
@@ -271,6 +275,23 @@ const styles=StyleSheet.create({
             height: 40,
             borderRadius: 5,
             margin: 10,
+        },
+        btn:{
+            
+            alignItems: "center",
+            backgroundColor: "#5ac618",
+            padding: 10,
+            borderRadius: 5,
+            borderColor: '#000',
+            margin:10
+            
+        },
+        text:{
+            color:'#fff',
+            fontFamily:'sans-serif',
+            fontSize: 15,
+            fontWeight: "bold"
+            
         }
 });
 
