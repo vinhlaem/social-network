@@ -4,7 +4,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import FeedScreen from './main/Feed'
 import AddfriendsScreen from './main/Addfriends'
-import notificationScreen from './main/notification '
+import notificationScreen from './main/notification'
 import MenuScreen from './main/Menu'
 const Tab = createMaterialBottomTabNavigator();
 export class Home extends Component {
