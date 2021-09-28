@@ -3,9 +3,8 @@ import { View, Text, Button, StyleSheet, FlatList, Dimensions, Image, TouchableO
 import { ActivityIndicator } from 'react-native-paper';
 import UrlAPI from '../../UrlAPI';
 import GetToken from '../../API/GetToken';
-
-const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvemJpb2dnZy5jb21cL2FwaVwvbG9naW4iLCJpYXQiOjE2MzI3OTQ1MjQsImV4cCI6MTYzMzA1MzcyNCwibmJmIjoxNjMyNzk0NTI0LCJqdGkiOiJ5YVFmTDRvVXpLQ212ekFiIiwic3ViIjoyLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.hoOh1Bl0hoMuWvg-tuxDEqwDXIw77YNH6C2GErpYOKI';
-const url = UrlAPI.url+"Posts";
+const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvemJpb2dnZy5jb21cL2FwaVwvbG9naW4iLCJpYXQiOjE2MzI4MjY2NzcsImV4cCI6MTYzMzA4NTg3NywibmJmIjoxNjMyODI2Njc3LCJqdGkiOiJId1F1YTBGZzl3SzhFWmhlIiwic3ViIjo0LCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.BLL3msF7NJ6IWqpsmu4T6Iiy7rx6pD6zp8E1IU2s1mc';
+const url = UrlAPI.url+"posts";
 
 export class Feed extends Component {
 
@@ -21,12 +20,7 @@ export class Feed extends Component {
           .then((response)=>response.json())
           .then((response)=>
             {
-              if((response.success))
-                {
-                  console.log(response)
-                  
-                            
-                  }     
+                console.log(response)   
                     })
                     .catch((error)=>
                     {

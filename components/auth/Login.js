@@ -53,6 +53,8 @@ export class Login extends Component {
                             {
                                  this.props.navigation.navigate("Home")
                                  saveToken(response.token);
+                                 GetToken()
+                                 .then(a => console.log('token:'+a))
                             
                             }else{
                                 alert("username or password is incorrect")

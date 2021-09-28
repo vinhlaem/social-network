@@ -30,10 +30,9 @@ export class App extends Component {
   render() {
     return (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Landing">
-          <Stack.Screen name="landing" component={LandingScreen} options={{ headerShown: false }}/>
-          <Stack.Screen name="Register" component={RegisterScreen}/>
+        <Stack.Navigator>
           <Stack.Screen name="Login" component={LoginScreen}/>
+          <Stack.Screen name="Register" component={RegisterScreen}/>
           <Stack.Screen name="Home" component={HomeScreen}/>
         </Stack.Navigator>
       </NavigationContainer>
