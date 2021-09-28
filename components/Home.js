@@ -10,24 +10,27 @@ const Tab = createMaterialBottomTabNavigator();
 export class Home extends Component {
     render() {
         return (
-            <Tab.Navigator initialRouteName="Home"
+            <Tab.Navigator 
             activeColor="#5ac618"
             inactiveColor="#a9a9a9"
             barStyle={{ backgroundColor: '#fff' }}>
                <Tab.Screen name="Feed" component={FeedScreen}
                     options={{
+                        
                         tabBarIcon: ({ color, size }) => (
                             <MaterialCommunityIcons name="home" color={color} size={26} />
                         ),
                     }} /> 
                      <Tab.Screen name="Addfriends" component={AddfriendsScreen}
                     options={{
+
                         tabBarIcon: ({ color, size }) => (
                             <MaterialCommunityIcons name="account-plus" color={color} size={26} />
                         ),
                     }} />
                      <Tab.Screen  name="notification" component={notificationScreen}
                     options={{
+                    
                         tabBarIcon: ({ color, size }) => (
                             <MaterialCommunityIcons name="bell" color={color} size={26} />
                         ),
@@ -40,6 +43,7 @@ export class Home extends Component {
                     }} />
             </Tab.Navigator>
                 /*<Text>HomeScreen</Text>*/
+                
             
         )
     }

@@ -1,34 +1,42 @@
 import React, { Component } from 'react'
 import { View, Text,TextInput,Image, StyleSheet,TouchableOpacity } from 'react-native'
-//import { TextInput } from 'react-native-gesture-handler';
-//import { StackNavigator } from 'react-navigation';
-
+// import * as SecureStore from 'expo-secure-store'
+// import AsyncStorage from '@react-native-async-storage/async-storage';
+import UrlAPI from '../../UrlAPI';
+import GetToken from '../../API/GetToken';
+import saveToken from '../../API/SaveTonken';
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from 'react-native-elements/dist/input/Input';
-
+// const storeData = async (key,value) => {
+//     try {
+//       await AsyncStorage.setItem(key, value)
+//     } catch (e) {
+//       // saving error
+//     }
+//   }
 export class Login extends Component {
-      
-
+  
     constructor(props)
     {
         super(props);
         this.state={username:'',password:''}
 
     }
-    onLogin=()=>{
+    
+    onLogin= async()=>{
         var username = this.state.username;
         var password = this.state.password;
         if(username.length==0|| password.length==0){
             alert("Required Field is Missing")
         }
         else{
-            var LoginAPIURL="http://api.zbioggg.com/api/login";
+            var LoginAPIURL=UrlAPI.url+"login ";
             var headers={'Accept':'application/json',
                            'Content-Type':'application/json' };
             var Data={
                 'username':username,
-               'password':password
+                'password':password
             };
 
             fetch(LoginAPIURL,
@@ -41,25 +49,32 @@ export class Login extends Component {
                 .then((response)=>response.json())
                 .then((response)=>
                     {
-                        if((response.success))
-                        {
-                            this.props.navigation.navigate("Home")
+                            if((response.success))
+                            {
+                                 this.props.navigation.navigate("Home")
+                                 saveToken(response.token);
                             
-                        }else{
-                            alert("username or password is incorrect")
-                        }
-                        
-                        
+                            }else{
+                                alert("username or password is incorrect")
+                            }
+                       
                     })
+                    
                     .catch((error)=>
                     {
                         alert("error"+error);
                     })
+                   
         }
         }
-
+    
+    componentDidMount(){
+            GetToken()
+            .then(a => console.log('TOKEN::::'+a));
+    }
 
     render() {
+       
         return (
             <View style={styles.ViewStyle}>
 

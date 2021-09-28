@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text,Image, StyleSheet, ScrollView,Button,TouchableOpacity} from 'react-native'
 import { TextInput } from 'react-native-gesture-handler';
-
+import UrlAPI from '../../UrlAPI';
 
 
 //import { Button } from 'react-native-elements';
@@ -39,7 +39,7 @@ export class Register extends Component {
         }
         
         else{
-            var LoginAPIURL="http://api.zbioggg.com/api/register";
+            var LoginAPIURL=UrlAPI.url+ "register";
             var headers={'Accept':'application/json',
                            'Content-Type':'application/json'};
             var Data={
