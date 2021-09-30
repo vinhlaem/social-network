@@ -53,9 +53,6 @@ export class Login extends Component {
                             {
                                  this.props.navigation.navigate("Home")
                                  saveToken(response.token);
-                                 GetToken()
-                                 .then(a => console.log('token:'+a))
-                            
                             }else{
                                 alert("username or password is incorrect")
                             }
@@ -70,7 +67,7 @@ export class Login extends Component {
         }
         }
     
-    componentDidMount(){
+    componentDidMount(){ // này á uk
             GetToken()
             .then(a => console.log('TOKEN::::'+a));
     }
@@ -143,7 +140,7 @@ const styles=StyleSheet.create({
     txtStyle:
     {
         flex: 1,
-        borderBottomColor:'black',
+        //borderBottomColor:'black',
         
     },
     imgstyle:{
@@ -161,7 +158,6 @@ const styles=StyleSheet.create({
     },
     sectionStyle:{
         flexDirection: 'row',
-        
         alignItems: 'center',
         backgroundColor: '#fff',
         borderWidth: 0.5,
