@@ -10,10 +10,10 @@ const Tab = createMaterialBottomTabNavigator();
 export class Home extends Component {
     render() {
         return (
-            <Tab.Navigator 
+            <Tab.Navigator
             activeColor="#5ac618"
             inactiveColor="#a9a9a9"
-            barStyle={{ backgroundColor: '#fff' }}>
+            barStyle={{ backgroundColor: '#fff', height: 60}}>
                <Tab.Screen name="Feed" component={FeedScreen}
                     options={{
                         
