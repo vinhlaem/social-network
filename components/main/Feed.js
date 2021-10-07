@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Button, StyleSheet, FlatList, Dimensions, Image, TouchableOpacity, Alert, ScrollView, TextInput } from 'react-native'
+import { View, Text, Button, StyleSheet, FlatList, Dimensions, Image, TouchableOpacity, Alert, ScrollView, TextInput, RefreshControl } from 'react-native'
 import { ActivityIndicator } from 'react-native-paper';
 import UrlAPI from '../../UrlAPI';
 import GetToken from '../../API/GetToken';
@@ -62,6 +62,7 @@ export class Feed extends Component {
     super(props)
     this.state = ({
       deletedRowKey: null,
+      refreshing:false,
       datapost: [],
       datauser:{}
     });
@@ -74,15 +75,23 @@ export class Feed extends Component {
     GetAuUser().then((user) => {
       this.setState({datauser:user});
       console.log(user.img_avt)
-    })
+    }).catch((error)=>{
+      this.setState({datauser:[]});
+    });
   }
   refreshPost = () => {
+    this.setState({refreshing:true})
     GetPostAPI().then((post) => {
       this.setState({ datapost: post });
+      this.setState({refreshing:false})
       
     }).catch((error) => {
       this.setState({ datapost: [] });
+      this.setState({refreshing:false})
     });
+  }
+  onRefresh = () =>{
+    this.refreshPost();
   }
   // refreshFlatList = (activeKey) => {
   //   this.setState((prevState) => {
@@ -142,7 +151,11 @@ export class Feed extends Component {
                 </FlatListItem>
                 );
             }}
-            keyExtractor={(item, index) => item.userfullname}
+            keyExtractor={(item, index) => index.toString()}
+            refreshControl={<RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this.onRefresh}
+            />}
           >
           </FlatList>
         </View>
