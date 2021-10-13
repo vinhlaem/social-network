@@ -9,7 +9,7 @@ import RegisterScreen from './components/auth/Register';
 import LoginScreen from './components/auth/Login';
 import HomeScreen from './components/Home';
 import { Provider } from 'react-redux';
-
+import Profile from './components/Profile';
 
 
 
@@ -34,6 +34,7 @@ export class App extends Component {
           <Stack.Screen name="Login" component={LoginScreen}/>
           <Stack.Screen name="Register" component={RegisterScreen}/>
           <Stack.Screen name="Home" component={HomeScreen}/>
+          <Stack.Screen name="Profile" component={Profile}/>
         </Stack.Navigator>
       </NavigationContainer>
       

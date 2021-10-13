@@ -26,7 +26,7 @@ class FlatListItem extends Component {
           <Text style={{paddingLeft: 10, paddingTop:10}}>
             {this.props.item.userfullname}
           </Text>
-        </TouchableOpacity>
+        </TouchableOpacity >
         <Text style={{paddingLeft: 10}}>{this.props.item.post_Content}</Text>
         {
         this.props.item.post_Images.length!=0?
@@ -101,6 +101,9 @@ export class Feed extends Component {
   //   });
   //   this.refs.FlatList.scrollToEnd();
   // }
+  onProfile = () =>{
+    this.props.navigation.navigate("Profile")
+  }
   render() {
     return (
       
@@ -114,7 +117,7 @@ export class Feed extends Component {
           </TouchableOpacity>
         </View>
         <View style={{ flexDirection: 'row', height: 50, borderBottomColor: '#DFDFDF', borderBottomWidth: 1 }}>
-          <TouchableOpacity style={{ height: 40, width: 40, marginTop: 2, marginLeft: 10 }}>
+          <TouchableOpacity onPress={this.onProfile} style={{ height: 40, width: 40, marginTop: 2, marginLeft: 10 }}>
             {
               this.state.datauser.img_avt?
               <Image style={{ height: 40, width: 40, marginTop: 3, marginLeft: 2, borderRadius: 100 }} source={{uri: 'https://zbioggg.com/'+this.state.datauser.img_avt }} />
@@ -124,11 +127,10 @@ export class Feed extends Component {
             
            
           </TouchableOpacity>
-          <TextInput style={styles.txtStyle} placeholder={"What are you thinking???"}
-            placeholderTextColor={"#a9a9a9"}
-            underlineColorAndroid="transparent"
-          >
-          </TextInput>
+          <TouchableOpacity style={{borderWidth:1,borderRadius:50, padding:10,width:300,height:40,marginTop:5, marginLeft:5,borderColor:"#DFDFDF"}}>
+            <Text style={{color:"#a9a9a9"}}>What are you thinking???</Text>
+          </TouchableOpacity>
+          
         </View>
         <View style={styles.viewbtn} >
           <TouchableOpacity style={styles.btn}>
