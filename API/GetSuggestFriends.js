@@ -1,12 +1,12 @@
 import React, {Component} from "react";
 import UrlAPI from "../UrlAPI";
 import GetToken from '../API/GetToken';
-const url = UrlAPI.url+"userprofile/4";
+const url = UrlAPI.url+"suggestFriends";
 var token = '';
 GetToken().then(t =>{
     token = t;
 })
-async function GetProfile(){
+async function GetSuggestFriends(){
     var headers={'Accept':'application/json',
     'Content-Type':'application/json',
     'Authorization': 'Bearer ' + token };
@@ -24,4 +24,4 @@ async function GetProfile(){
     
       
   }
-  export default GetProfile;
+  export default GetSuggestFriends;

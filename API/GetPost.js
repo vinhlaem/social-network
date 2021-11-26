@@ -3,6 +3,10 @@ import UrlAPI from "../UrlAPI";
 import GetToken from '../API/GetToken';
 const url = UrlAPI.url+"posts";
 var token = '';
+
+//viet them api or sua
+// viet file js api co the truyen bien array vao(post ID), bien truyen vao ten la arrID
+//ur nhu tren them ?postArr=+arrID
 GetToken().then(t =>{
     token = t;
 })

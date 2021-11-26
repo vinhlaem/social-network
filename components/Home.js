@@ -13,7 +13,7 @@ export class Home extends Component {
             <Tab.Navigator
             activeColor="#5ac618"
             inactiveColor="#a9a9a9"
-            barStyle={{ backgroundColor: '#fff', height: 60}}>
+            barStyle={{ backgroundColor: '#fff', height: 50}}>
                <Tab.Screen name="Feed" component={FeedScreen}
                     options={{
                         

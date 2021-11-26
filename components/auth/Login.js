@@ -67,7 +67,7 @@ export class Login extends Component {
         }
         }
     
-    componentDidMount(){ // này á uk
+    componentDidMount(){ 
             GetToken()
             .then(a => console.log('TOKEN::::'+a));
     }
