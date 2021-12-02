@@ -72,6 +72,7 @@ export class Profile extends Component {
       this.setState({userInfo:profile.user[0]});
       this.setState({userPosts:profile.data});
       this.setState({userPhotos:profile.photos});
+      //console.log(profile.user[0])
       // this.setState.totalLike();
       Array.from(this.state.userPosts).forEach(element => {
         t+=element.like_qty;

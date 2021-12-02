@@ -77,12 +77,7 @@ export class Login extends Component {
         return (
             <View style={styles.ViewStyle}>
 
-                <Image
-                    style={styles.imgstyle}
-                    source={
-                    require('../../img/logo.png')
-                }
-            />
+            <Text style={styles.title}>ZBIO</Text>
                 <View style={styles.sectionStyle}>
                     <Image
                     source={
@@ -181,7 +176,13 @@ const styles=StyleSheet.create({
         fontSize: 15,
         fontWeight: "bold"
         
-    }
+    },
+    title:{
+        fontSize:30,
+        textAlign:'center',
+        fontWeight:'bold',
+        color:'#5ac618'
+      }
     
 });
 

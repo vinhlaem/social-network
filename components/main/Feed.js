@@ -6,12 +6,14 @@ import icsearch from '../../img/search.png'
 import iccamera from '../../img/iccamera.png'
 import icgallery from '../../img/gallery.png'
 import icheart from '../../img/heart.png'
-import icheartreact from '../../img/heartreact.png'
+import icheartcolor from '../../img/icheart.png'
+import icheartreact from '../../img/green.png'
 import iccomment from '../../img/comment.png'
 import ava from '../../img/ava.png'
 import GetPostAPI from '../../API/GetPost';
 import GetAuUser from '../../API/GetAuUser';
 import GetToken from '../../API/GetToken';
+
 var token = '';
 GetToken().then(t =>{
   token = t;
@@ -29,7 +31,11 @@ class Feed extends React.Component {
       refreshing:false,
       datapost: [],
       datauser:{},
-      listPostNF_id:[] //post?po
+      listPostNF_id:[], //post?po
+      backgroundColor: 'white',
+      pressed: false,
+      colortext:'black',
+      iconheart:icheart
     });
   }
   componentDidMount() {
@@ -44,7 +50,9 @@ class Feed extends React.Component {
       this.setState({datauser:[]});
     });
   }
-  refreshPost = async () => {
+
+  loadMorePost = async () => {
+
     const url = UrlAPI.url+"posts?arrPosts="+ this.state.listPostNF_id;
     console.log("url: "+url);
     var headers={'Accept':'application/json',
@@ -57,9 +65,53 @@ class Feed extends React.Component {
                 method:'GET',
                 headers:headers,
             }).then((response)=>response.json())
-            .then((responseJson)=>{this.setState({
-              datapost:this.state.datapost.concat(responseJson.data),
-              refreshing : false,
+            .then((responseJson)=>{
+              this.setState({
+                   datapost:this.state.datapost.concat(responseJson.data),
+                  refreshing : false,
+            });
+            responseJson.data.map(a=>{
+              this.state.listPostNF_id.push(a.postID);
+            })
+            
+          })
+          
+        //let responseJson = await response.json();
+        //return responseJson.data
+    }catch (error) {
+        console.error(`Error is: ${error}`);
+    }
+
+   
+    //   
+    //   Array.from(this.state.datapost).forEach(element => {
+    //     this.state.listPostNF_id.push(element.postID)
+    //     console.log(this.state.listPostNF_id)
+    //   });
+      
+   
+  }
+
+  refreshPost = async () => {
+
+    const url = UrlAPI.url+"posts";
+    console.log("url: "+url);
+    var headers={'Accept':'application/json',
+    'Content-Type':'application/json',
+    'Authorization': 'Bearer ' + token };
+    this.setState({refreshing:true})
+    try{
+        fetch(url,
+            {
+                method:'GET',
+                headers:headers,
+            }).then((response)=>response.json())
+            .then((responseJson)=>{
+              console.log(responseJson);
+              this.setState({
+                   datapost:responseJson.data,
+                   listPostNF_id:[],
+                  refreshing : false,
             });
             responseJson.data.map(a=>{
               this.state.listPostNF_id.push(a.postID);
@@ -87,7 +139,7 @@ class Feed extends React.Component {
     this.refreshPost();
   }
   onLoadmoreData =() =>{
-    this.refreshPost();
+    this.loadMorePost();
       
   };
   onProfile = () =>{
@@ -102,6 +154,52 @@ class Feed extends React.Component {
   onCmt = () => {
     this.props.navigation.navigate("Comment")
   }
+  onLike = async() =>{
+    var idpost= '975'; //this.state.datapost.postID;
+    var LikesAPIURL = UrlAPI.url + "likes";
+    var headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        }
+        var Data = {
+          'postID': idpost,
+      };
+        fetch(LikesAPIURL,
+            {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify(Data)
+            }
+        )
+            .then((response) => response.json())
+            .then((response) => {
+                
+                if ((response.message=='liked')) {
+                    console.log(response);
+                    this.setState({
+                      colortext: 'green',
+                      iconheart:icheartreact
+                 });
+                } else {
+                  this.setState({
+                    colortext: 'black',
+                    iconheart:icheart
+               });
+                }
+
+            })
+
+            .catch((error) => {
+                alert("error" + error);
+            })
+    
+  //   if(!this.state.pressed){
+  //     this.setState({ pressed: true,colortext: 'red',iconheart:icheartreact});
+  //  } else {
+  //    this.setState({ pressed: false, colortext: 'black',iconheart:icheart});
+  //  }
+  }
   render() {
     _renderItem = ({item, index}) =>{
       return (
@@ -113,22 +211,30 @@ class Feed extends React.Component {
           </Text>
         </TouchableOpacity >
         <Text style={{paddingLeft: 10}}>{item.post_Content}</Text>
-
         {
         item.post_Images.length!=0?
           <Image style={{ height: 300, width: null }} source={{uri: 'https://zbioggg.com/' + item.post_Images[0].image}}/>
         :null
         }
-        
         <View style={{paddingLeft: 10,borderBottomColor: '#DFDFDF', borderBottomWidth: 1,flexDirection: 'row',justifyContent: 'space-between',}}>
           <Text>{item.like_qty}
           </Text>
           <Text>{item.cmt_qty} bình luận</Text>
         </View>
         <View style={styles.viewbtn1}>
-        <TouchableOpacity style={styles.btn}>
-            <Image style={{ height: 25, width: 25, marginTop: 3, marginLeft: 2 }} source={icheart} />
-            <Text style={{ marginTop: 7, marginLeft: 5 }}>Thích</Text>
+        <TouchableOpacity onPress = {this.onLike} style={styles.btn}>
+          
+            {item.liked==0?
+            <Image style={{ height: 30, width: 30, marginTop: 3, marginLeft: 2, backgroundColor: 'rgba(0,0,0,0)'}} source={this.state.iconheart} />
+            :
+            <Image style={{ height: 30, width: 30, marginTop: 3, marginLeft: 2, backgroundColor: 'rgba(0,0,0,0)'}} source={icheartreact} />
+            }
+             {item.liked==0?
+            <Text style={{ marginTop: 7, marginLeft: 5,color:this.state.colortext }}>Thích</Text>
+            :
+            <Text style={{ marginTop: 7, marginLeft: 5,color:'green' }}>Thích</Text>
+            }
+          
           </TouchableOpacity>
           <TouchableOpacity onPress = {this.onCmt} style={styles.btn1}>
             <Image style={{ height: 25, width: 25, marginTop: 3, marginLeft: 2 }} source={iccomment} />
@@ -141,12 +247,12 @@ class Feed extends React.Component {
       )
     }
     return (
-      
       <View style={{ backgroundColor: 'white', paddingBottom:350}}>   
         <View style={styles.viewheader}>
           <Text style={{ fontSize: 25, color: '#5ac618', paddingLeft: 10, marginTop: 7 }}>
             ZBIOGG
           </Text>
+          
           <TouchableOpacity onPress={this.onSearch} style={{ height: 40, width: 40, backgroundColor: '#DFDFDF', marginTop: 3, marginRight: 10, borderRadius: 100 }}>
             <Image style={{ height: 35, width: 35, marginTop: 2, marginLeft: 2 }} source={icsearch} />
           </TouchableOpacity>
@@ -213,6 +319,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10
   },
   btn: {
+    backgroundColor: 'transparent',
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 15,
@@ -222,6 +329,7 @@ const styles = StyleSheet.create({
     width: 145
   },
   btn1: {
+    backgroundColor: 'transparent',
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 15,

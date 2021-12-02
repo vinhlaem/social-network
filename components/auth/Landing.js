@@ -24,24 +24,20 @@ container:{
         flex:1,
         padding:20,
         marginTop:200,
+},
+title:{
+  fontSize:30,
+  textAlign:'center',
+  fontWeight:'bold',
+  color:'#5ac618'
 } 
     
   });
 
 export default function Landing({ navigation }) {
     return (
-        <View style={styles.container} >
-            <Image
-        style={{
-          resizeMode: "center",
-          height: 100,
-          width: 320}
-            }
-        source={
-          require('../../img/logo.png')
-        }
-      />
-            
+        <View style={styles.container}>
+            <Text style={styles.title}>ZBIO</Text>
             <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate("Register")}>
               <Text style={styles.text}>
                   Register

@@ -1,11 +1,15 @@
 import React, {Component} from "react";
 import UrlAPI from "../UrlAPI";
 import GetToken from '../API/GetToken';
-const url = UrlAPI.url+"userprofile/4";
+
+const url = UrlAPI.url+"userprofile/2";
+
+
 var token = '';
 GetToken().then(t =>{
     token = t;
 })
+
 async function GetProfile(){
     var headers={'Accept':'application/json',
     'Content-Type':'application/json',
