@@ -8,6 +8,7 @@ var token = '';
 GetToken().then(t => {
     token = t;
 })
+
 export class Comment extends Component {
     constructor(props) {
         super(props)
@@ -16,17 +17,21 @@ export class Comment extends Component {
             refreshing: false,
             datacmts: [],
             text: '',
-            height: 0
+            height: 0,
 
         });
     }
+   
     componentDidMount() {
+        
         this.Getcomment();
+
     }
 
     Getcomment = async () => {
-        var text = 933;
-        var CommentAPIURL = UrlAPI.url + "postcmts?postID=" + text;
+        var postID = this.props.route.params.postID;
+        console.log(postID);
+        var CommentAPIURL = UrlAPI.url + "postcmts?postID=" + postID;
         var headers = {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -45,6 +50,7 @@ export class Comment extends Component {
                     console.log(response);
                     this.setState({
                         datacmts: response.cmts
+                        
                     });
                 } else {
                     alert("loi");
