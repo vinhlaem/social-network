@@ -9,13 +9,14 @@ GetToken().then(t => {
     token = t;
 })
 
-export class Comment extends Component {
+export class Repcomment extends Component {
     constructor(props) {
         super(props)
         this.state = ({
             deletedRowKey: null,
             refreshing: false,
-            datacmts: [],
+            datacmts:[],
+            datarepcmts: [],
             text: '',
             height: 0,
 
@@ -24,20 +25,20 @@ export class Comment extends Component {
    
     componentDidMount() {
         
-        this.Getcomment();
+        this.Getrepcomment();
 
     }
 
-    Getcomment = async () => {
-        var postID = this.props.route.params.postID;
-        console.log(postID);
-        var CommentAPIURL = UrlAPI.url + "postcmts?postID=" + postID;
+    Getrepcomment = async () => {
+        var cmtsID = this.props.route.params.comment_ID;
+        console.log(cmtsID);
+        var RepcommentAPIURL = UrlAPI.url + "replycomments?comment_ID=" + cmtsID;
         var headers = {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + token
         }
-        fetch(CommentAPIURL,
+        fetch(RepcommentAPIURL,
             {
                 method: 'GET',
                 headers: headers
@@ -49,7 +50,8 @@ export class Comment extends Component {
                 if ((response.success)) {
                     console.log(response);
                     this.setState({
-                        datacmts: response.cmts
+                        datacmts: response.cmt,
+                        datarepcmts: response.replycmts
                         
                     });
                 } else {
@@ -62,25 +64,25 @@ export class Comment extends Component {
                 alert("error" + error);
             })
     }
-    oncomments = () =>{
+    onRepcomments = () =>{
         var text = this.state.text;
-        var PostID = this.props.route.params.postID;
+        var comments_ID = this.props.route.params.comment_ID;
         if (text == '') {
             alert("Vui lòng nhập nội dung hoặc chọn ảnh!");
         } else {
 
-            var CommentsAPIURL = UrlAPI.url + "comments ";
+            var RepcommentsAPIURL = UrlAPI.url + "repcmt ";
             var headers = {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + token
             }
             var Data = {
-                'content_cmt': text,
-                'postID': PostID
+                'comment_ID': comments_ID,
+                'content_repcmt': text
             };
 
-            fetch(CommentsAPIURL,
+            fetch(RepcommentsAPIURL,
                 {
                     method: 'POST',
                     headers: headers,
@@ -93,7 +95,7 @@ export class Comment extends Component {
                     if ((response.success)) {
                         console.log(response);
                         this.setState({
-                            datacmts: this.state.datacmts.concat(response.cmt),
+                            datarepcmts: this.state.datarepcmts.concat(response.repcmt),
                             text:''
                         });
                     } else {
@@ -109,15 +111,36 @@ export class Comment extends Component {
 
 
     }
-    onRepcmts = (id) =>{
-        this.props.navigation.navigate("Repcomment",{
-            comment_ID: id
-          })
-    }
-
-
 
     render() {
+
+        _renderItemrep = ({item,index}) =>{
+            return(
+            <View style={{ flexDirection: 'row', padding: 10 }}>
+                <View >
+                    {
+                        item.userAvt ?
+                            <Image style={{ height: 30, width: 30, marginTop: 3, marginLeft: 2, borderRadius: 100 }} source={{ uri: 'https://zbioggg.com/' + item.userAvt }} />
+                            :
+                            <Image style={{ height: 30, width: 30, marginTop: 3, marginLeft: 2, borderRadius: 100 }} source={{ uri: 'https://zbioggg.com/' + 'img/avt/avt-default.png' }} />
+                    }
+                </View>
+                <View style={{ marginLeft: 10 }}>
+                    <View style={{ paddingLeft: 10, backgroundColor: '#DFDFDF', borderRadius: 10, width: 170 }}>
+                        <Text style={{ fontWeight: 'bold', fontSize: 15 }}>{item.userfullname}</Text>
+                        <Text style={{ paddingLeft: 5, fontSize: 15 }}>{item.content_repcmt}</Text>
+                    </View>
+                    <TouchableOpacity onPress={this.onRepcmts} style={{ marginLeft: 10 }}>
+                        {item.repcmt_qty == 0 ?
+                            <Text>Trả lời</Text>
+                            :
+                            <Text>{item.repcmt_qty} Phản hòi</Text>
+                        }
+                    </TouchableOpacity>
+                </View>
+            </View>
+            )
+        }
 
         _renderItem = ({ item, index }) => {
             return (
@@ -134,16 +157,24 @@ export class Comment extends Component {
                     </View>
                     <View style={{ marginLeft: 10 }}>
                         <View style={{ paddingLeft: 10, backgroundColor: '#DFDFDF', borderRadius: 10, width: 170 }}>
-                            <Text style={{ fontWeight: 'bold', fontSize: 15 }}>{item.userfullname}</Text>
-                            <Text style={{ paddingLeft: 5, fontSize: 15 }}>{item.content_cmt}</Text>
+                            <Text style={{ fontWeight: 'bold', fontSize: 16 }}>{item.userfullname}</Text>
+                            <Text style={{ paddingLeft: 5, fontSize: 16 }}>{item.content_cmt}</Text>
                         </View>
-                        <TouchableOpacity onPress={()=>this.onRepcmts(item.id)} style={{ marginLeft: 10 }}>
+                        <TouchableOpacity onPress={this.onRepcmts} style={{ marginLeft: 10 }}>
                             {item.repcmt_qty == 0 ?
                                 <Text>Trả lời</Text>
                                 :
                                 <Text>{item.repcmt_qty} Phản hòi</Text>
                             }
                         </TouchableOpacity>
+                        <FlatList
+                        //ref={"flatlist"}
+                        data={this.state.datarepcmts}
+                        renderItem={_renderItemrep}
+                        keyExtractor={(item, index) => index.toString()}
+                        >
+
+                        </FlatList>
                     </View>
 
 
@@ -156,7 +187,7 @@ export class Comment extends Component {
                 <View>
                     <FlatList
 
-                        ref={"flatlist"}
+                        //ref={"flatlist1"}
                         data={this.state.datacmts}
                         renderItem={_renderItem}
                         keyExtractor={(item, index) => index.toString()}
@@ -179,24 +210,22 @@ export class Comment extends Component {
                         style={[styles.default, { height: Math.max(35, this.state.height) }]}
                         value={this.state.text}
                     />
-                    <TouchableOpacity onPress={this.oncomments} style={{marginLeft:10}}> 
+                    <TouchableOpacity onPress={this.onRepcomments} style={{marginLeft:10,backgroundColor: 'transparent'}}> 
                         <Image style={{ height: 30, width: 30, marginTop: 3, marginLeft: 2, }} source={icsend} />
                     </TouchableOpacity>
                 </View>
-                
-                
             </View>
         )
     }
 }
 
-export default Comment
+export default Repcomment
 const styles = StyleSheet.create({
     default: {
         paddingLeft:10,
         fontSize: 20,
         width: 280,
-        height: 30,
+        height: 40,
 
 
     },

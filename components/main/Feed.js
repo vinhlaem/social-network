@@ -150,6 +150,10 @@ class Feed extends React.Component {
   onProfile = () => {
     this.props.navigation.navigate("Profile")
   }
+  onProfileother = (userID) => {
+    this.props.navigation.navigate("Profileorther",{
+      userID:userID})
+  }
   onPoststatus = () => {
     this.props.navigation.navigate("PostStatus")
   }
@@ -216,7 +220,7 @@ class Feed extends React.Component {
     _renderItem = ({ item, index }) => {
       return (
         <View style={{ flex: 1, borderBottomColor: '#DFDFDF', borderBottomWidth: 5 }}>
-          <TouchableOpacity style={{ flexDirection: 'row' }}>
+          <TouchableOpacity onPress={()=>this.onProfileother(item.userID)} style={{ flexDirection: 'row' }}>
             <Image style={{ height: 35, width: 35, marginTop: 2, marginLeft: 2, borderRadius: 100 }} source={{ uri: 'https://zbioggg.com/' + item.userAvt }} />
             <Text style={{ paddingLeft: 10, paddingTop: 10 }}>
               {item.userfullname}

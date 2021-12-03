@@ -12,6 +12,8 @@ import Profile from './components/Profile';
 import PostStatus from './components/PostStatus';
 import Search from './components/Search';
 import Comment from './components/Comment';
+import Repcomment from './components/Repcomment';
+import Profileorther from './components/Profileorther';
 const Stack = createStackNavigator();
 
 
@@ -38,6 +40,9 @@ export class App extends Component {
           <Stack.Screen name="PostStatus" component={PostStatus} />
           <Stack.Screen name = "Search" component={Search}/>
           <Stack.Screen name = "Comment" component={Comment}/>
+          <Stack.Screen name ="Repcomment" component={Repcomment}/>
+          <Stack.Screen name ="Profileorther" component={Profileorther}/>
+
         </Stack.Navigator>
       </NavigationContainer>
       
