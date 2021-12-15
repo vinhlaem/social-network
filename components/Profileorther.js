@@ -170,10 +170,8 @@ export class Profileorther extends Component {
                         <Text style={{ fontSize: 15, textAlign: 'center',fontWeight:'bold' }}>Xác nhận</Text>
                         :(this.state.userInfo.status_friend==1 ?
                         <Text style={{ fontSize: 15, textAlign: 'center',fontWeight:'bold' }}>Bạn bè</Text>
-
                         :
                         <Text style={{ fontSize: 15, textAlign: 'center',fontWeight:'bold' }}>thêm bạn bè</Text>
-                        
                         )
                         }
                       </TouchableOpacity>
@@ -214,7 +212,7 @@ export class Profileorther extends Component {
                 }
                 //nestedScrollEnabled={true}
                 style={{ flex: 0 }}
-                ref={"flatlist"}
+                ref={"flatlist"} 
                 data={this.state.userPosts}
                 renderItem={({ item, index }) => {
                   return (

@@ -18,6 +18,7 @@ export class Comment extends Component {
             datacmts: [],
             text: '',
             height: 0,
+            cmt:''
 
         });
     }
@@ -49,7 +50,8 @@ export class Comment extends Component {
                 if ((response.success)) {
                     console.log(response);
                     this.setState({
-                        datacmts: response.cmts
+                        datacmts: response.cmts,
+                        cmt: response.cmts_qty
                         
                     });
                 } else {
@@ -66,7 +68,7 @@ export class Comment extends Component {
         var text = this.state.text;
         var PostID = this.props.route.params.postID;
         if (text == '') {
-            alert("Vui lòng nhập nội dung hoặc chọn ảnh!");
+            alert("Vui lòng nhập nội dung");
         } else {
 
             var CommentsAPIURL = UrlAPI.url + "comments ";
@@ -114,17 +116,59 @@ export class Comment extends Component {
             comment_ID: id
           })
     }
+    onmorecmt = () =>{
+        var firstCmtID = this.state.datacmts[0].id;
+        console.log(firstCmtID)
+        var PostID = this.props.route.params.postID;
+       
+            var CommentsAPIURL = UrlAPI.url + "viewMoreCmts";
+            var headers = {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            }
+            var Data = {
+                'firstCmtID': firstCmtID,
+                'postID': PostID
+            };
+
+            fetch(CommentsAPIURL,
+                {
+                    method: 'POST',
+                    headers: headers,
+                    body: JSON.stringify(Data)
+                }
+            )
+                .then((response) => response.json())
+                .then((response) => {
+                    console.log(response);
+                    if ((response.success)) {
+                        console.log(response);
+                        this.setState({
+                            datacmts: this.state.datacmts.concat(response.cmts),
+                            cmt:response.cmts_qty
+                        });
+                    } else {
+                        alert("loi");
+                    }
+
+                })
+
+                .catch((error) => {
+                    alert("error" + error);
+                })
+        
+    }
 
 
 
     render() {
-
         _renderItem = ({ item, index }) => {
             return (
-
-
                 <View style={{ flexDirection: 'row', padding: 10 }}>
+                   
                     <View >
+                        
                         {
                             item.userAvt ?
                                 <Image style={{ height: 40, width: 40, marginTop: 3, marginLeft: 2, borderRadius: 100 }} source={{ uri: 'https://zbioggg.com/' + item.userAvt }} />
@@ -153,9 +197,21 @@ export class Comment extends Component {
 
         return (
             <View style={styles.container}>
-                <View>
+                 
+                <View  style={{flex: 0.9}}>
                     <FlatList
-
+                        ListHeaderComponent={
+                            
+                            <View style={{padding:10}}>
+                            {this.state.cmt>5?
+                           <TouchableOpacity onPress={this.onmorecmt}>
+                               <Text>Xem thêm bình luận</Text>
+                           </TouchableOpacity>
+                           :null
+                           }
+                           </View>
+                        }
+                        
                         ref={"flatlist"}
                         data={this.state.datacmts}
                         renderItem={_renderItem}
@@ -202,7 +258,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        position: 'relative',
+        
         bottom: 0,
 
     },
