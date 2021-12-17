@@ -144,10 +144,11 @@ export class Comment extends Component {
                     console.log(response);
                     if ((response.success)) {
                         console.log(response);
-                        this.setState({
-                            datacmts: this.state.datacmts.concat(response.cmts),
-                            cmt:response.cmts_qty
-                        });
+                        console.log(this.state.datacmts.length);
+                        this.state.datacmts.unshift(...response.cmts);
+                        console.log(response.cmts.length);
+                        console.log(this.state.datacmts.length);
+                        this.setState({cmt:response.cmts_qty});
                     } else {
                         alert("loi");
                     }

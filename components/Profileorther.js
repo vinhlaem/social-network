@@ -16,7 +16,7 @@ class FlatListItem extends Component {
   render() {
     return (
       <View style={{ flex: 1, borderBottomColor: '#DFDFDF', borderBottomWidth: 5}}>
-        <TouchableOpacity style={{flexDirection: 'row' }}>
+        <TouchableOpacity style={{flexDirection: 'row', padding:10, paddingTop:10 }}>
           <Image style={{ height: 35, width: 35, marginTop: 2, marginLeft: 2,borderRadius: 100 }} source={{ uri: 'https://zbioggg.com/' + this.props.item.userAvt }} />
           <Text style={{paddingLeft: 10, paddingTop:10}}>
             {this.props.item.userfullname}
@@ -171,7 +171,7 @@ export class Profileorther extends Component {
                         :(this.state.userInfo.status_friend==1 ?
                         <Text style={{ fontSize: 15, textAlign: 'center',fontWeight:'bold' }}>Bạn bè</Text>
                         :
-                        <Text style={{ fontSize: 15, textAlign: 'center',fontWeight:'bold' }}>thêm bạn bè</Text>
+                        <Text style={{ fontSize: 15, textAlign: 'center',fontWeight:'bold' }}>Thêm bạn bè</Text>
                         )
                         }
                       </TouchableOpacity>
@@ -245,7 +245,9 @@ export default Profileorther
     container: {
         justifyContent: 'center',
         alignItems: 'center',
-        position: 'relative'
+        position: 'relative',
+       
+
         
       },
       imageStyle:{
@@ -272,6 +274,7 @@ export default Profileorther
     viewbtn1: {
       flexDirection: 'row',
       borderBottomWidth: 5,
-      borderBottomColor: '#DFDFDF'
+      borderBottomColor: '#DFDFDF',
+      height:50
     },
  });

@@ -220,7 +220,7 @@ class Feed extends React.Component {
     _renderItem = ({ item, index }) => {
       return (
         <View style={{ flex: 1, borderBottomColor: '#DFDFDF', borderBottomWidth: 5 }}>
-          <TouchableOpacity onPress={()=>this.onProfileother(item.userID)} style={{ flexDirection: 'row' }}>
+          <TouchableOpacity onPress={()=>this.onProfileother(item.userID)} style={{ flexDirection: 'row', padding:5 }}>
             <Image style={{ height: 35, width: 35, marginTop: 2, marginLeft: 2, borderRadius: 100 }} source={{ uri: 'https://zbioggg.com/' + item.userAvt }} />
             <Text style={{ paddingLeft: 10, paddingTop: 10 }}>
               {item.userfullname}
@@ -232,7 +232,7 @@ class Feed extends React.Component {
               <Image style={{ height: 300, width: null }} source={{ uri: 'https://zbioggg.com/' + item.post_Images[0].image }} />
               : null
           }
-          <View style={{ paddingLeft: 10, borderBottomColor: '#DFDFDF', borderBottomWidth: 1, flexDirection: 'row', justifyContent: 'space-between', }}>
+          <View style={{ padding: 10, borderBottomColor: '#DFDFDF', borderBottomWidth: 1, flexDirection: 'row', justifyContent: 'space-between', }}>
             <Text>{item.like_qty}
             </Text>
             <Text>{item.cmt_qty} bình luận</Text>
@@ -264,7 +264,7 @@ class Feed extends React.Component {
     }
     return (
 
-      <View style={{ backgroundColor: 'white', paddingBottom: 350 }}>
+      <View style={{ backgroundColor: 'white', paddingBottom: 300 }}>
         <View style={styles.viewheader}>
           <Text style={{ fontSize: 25, color: '#5ac618', paddingLeft: 10, marginTop: 7 }}>
             ZBIOGGG
@@ -356,12 +356,15 @@ const styles = StyleSheet.create({
   viewbtn: {
     flexDirection: 'row',
     borderBottomWidth: 5,
-    borderBottomColor: '#DFDFDF'
+    borderBottomColor: '#DFDFDF',
+    height:50
+
   },
   viewbtn1: {
     flexDirection: 'row',
     borderBottomWidth: 5,
     borderBottomColor: '#DFDFDF',
+    height:50
 
   },
   viewheader: {
