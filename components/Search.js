@@ -120,14 +120,16 @@ export class Search extends Component {
               <>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                   <TextInput
+                    backgroundColor='#DFDFDF'
                     onChangeText={(text) => {
                       this.setState({ text })
                     }}
-                    placeholder='tìm kiếm'
-                    style={{ borderWidth: 1, width: 300, marginLeft: 5, borderRadius: 10, paddingLeft: 10, borderColor: '#9C9C9C' }}
+                    placeholder='Tìm kiếm'
+                    
+                    style={{ borderWidth: 1, width: 300, marginLeft: 5, borderRadius: 10, padding: 5,margin:10, borderColor: '#28a745' }}
                   />
-                  <TouchableOpacity onPress={this.onSearch} style={{ height: 40, width: 40, backgroundColor: '#DFDFDF', marginTop: 3, marginRight: 10, borderRadius: 100 }}>
-                    <Image style={{ height: 35, width: 35, marginTop: 2, marginLeft: 2 }} source={icsearch} />
+                  <TouchableOpacity onPress={this.onSearch} style={{ height: 40, width: 40, marginTop: 10, marginRight: 10, borderRadius: 100 }}>
+                    <Image style={{ height: 40, width: 40, marginTop: 2, marginLeft: 2, borderRadius:100, backgroundColor: 'rgba(0,0,0,0)' }} source={icsearch} />
                   </TouchableOpacity>
                 </View>
                

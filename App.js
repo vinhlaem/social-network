@@ -15,6 +15,9 @@ import Comment from './components/Comment';
 import Repcomment from './components/Repcomment';
 import Profileorther from './components/Profileorther';
 import DetailPost  from './components/DetailPost';
+import ListFriends from './components/ListFriends';
+import Messenger from './components/Messenger';
+import Chat from './components/Chat';
 const Stack = createStackNavigator();
 
 
@@ -44,6 +47,9 @@ export class App extends Component {
           <Stack.Screen name ="Repcomment" component={Repcomment}/>
           <Stack.Screen name ="Profileorther" component={Profileorther}/>
           <Stack.Screen name ="DetailPost" component={DetailPost}/>
+          <Stack.Screen name ="ListFriends" component={ListFriends}/>
+          <Stack.Screen name = "Messenger" component={Messenger}/>
+          <Stack.Screen name = "Chat" component={Chat}/>
 
         </Stack.Navigator>
       </NavigationContainer>

@@ -32,15 +32,17 @@ class FlatListItem extends Component {
             : null
         }
 
-        <View style={{ paddingLeft: 10, borderBottomColor: '#DFDFDF', borderBottomWidth: 1, flexDirection: 'row', justifyContent: 'space-between', }}>
-          <Text>{this.props.item.like_qty}
-          </Text>
+        <View style={{ padding: 5, borderBottomColor: '#DFDFDF', borderBottomWidth: 1, flexDirection: 'row', justifyContent: 'space-between', }}>
+          <View style={{  flexDirection: 'row',  }}>
+            <Image style={{ height: 15, width: 15, marginTop: 3, marginLeft: 2, backgroundColor: 'rgba(0,0,0,0)' }} source={icheartreact}/>
+            <Text style={{paddingLeft:3}} >{this.props.item.like_qty}</Text>
+          </View>
           <Text>{this.props.item.cmt_qty} bình luận</Text>
         </View>
         <View style={styles.viewbtn1}>
           <TouchableOpacity style={styles.btn}>
           {this.props.item.liked == 0 ?
-                <Image style={{ height: 30, width: 30, marginTop: 3, marginLeft: 2, backgroundColor: 'rgba(0,0,0,0)' }} source={this.props.iconheart} />
+                <Image style={{ height: 30, width: 30, marginTop: 3, marginLeft: 2, backgroundColor: 'rgba(0,0,0,0)' }} source={icheart} />
                 :
                 <Image style={{ height: 30, width: 30, marginTop: 3, marginLeft: 2, backgroundColor: 'rgba(0,0,0,0)' }} source={icheartreact} />
               }
@@ -260,6 +262,15 @@ export class Profileorther extends Component {
         alert("error" + error);
       })
   }
+  onListFriends = (id) => {
+    this.props.navigation.navigate("ListFriends",{
+      ID:id
+    })
+  }
+  onchat = (id) => {
+    this.props.navigation.navigate("Chat",{
+        userID:id})
+  }
 
   render() {
     return (
@@ -272,8 +283,8 @@ export class Profileorther extends Component {
                   <Text style={{ fontSize: 20, color: '#5ac618', paddingLeft: 10, marginTop: 10 }}>
                     {this.state.userInfo.lastName} {this.state.userInfo.firstName}
                   </Text>
-                  <TouchableOpacity style={{ height: 40, width: 40, backgroundColor: '#DFDFDF', marginTop: 3, marginRight: 10, borderRadius: 100 }}>
-                    <Image style={{ height: 35, width: 35, marginTop: 2, marginLeft: 2 }} source={icsearch} />
+                  <TouchableOpacity style={{ height: 40, width: 40,  marginTop: 3, marginRight: 10, borderRadius: 100 }}>
+                    <Image style={{ height: 35, width: 35, marginTop: 2, marginLeft: 2, borderRadius:100 }} source={icsearch} />
                   </TouchableOpacity>
                 </View>
                 <View style={styles.container}>
@@ -307,11 +318,15 @@ export class Profileorther extends Component {
                     <Text style={{ fontSize: 15 }}>Bình Luận</Text>
                   </View>
                 </View>
-                <View style={{ padding: 10 }}>
-                  {this.state.userInfo.action_userID != this.state.datauser.id && this.state.userInfo.status_friend == 0   ?
+                <View style={{ padding: 10,flexDirection:'row' }}>
+                  <View style={{width:250, paddingEnd:10}}>
+                  {this.state.userInfo.action_userID != this.state.datauser.id && this.state.userInfo.status_friend == 0?
+                  
                     <TouchableOpacity onPress={() => this.acceptFriend(this.state.userInfo.id)} style={{ backgroundColor: '#5ac618', padding: 10, borderRadius: 5 }}>
                     <Text style={{ fontSize: 15, textAlign: 'center', fontWeight: 'bold' }}>Xác nhận</Text>
-                  </TouchableOpacity>
+                    </TouchableOpacity>
+                    
+                  
                     : (this.state.userInfo.status_friend == 0 &&  this.state.userInfo.action_userID == this.state.datauser.id?
                       
                        <TouchableOpacity onPress={() => this.canceladdfriends(this.state.userInfo.id)} style={{ backgroundColor: '#5ac618', padding: 10, borderRadius: 5 }}>
@@ -326,33 +341,68 @@ export class Profileorther extends Component {
                           <Text style={{ fontSize: 15, textAlign: 'center', fontWeight: 'bold' }}>Bạn bè</Text>
                         </TouchableOpacity>
                         :
-                        <TouchableOpacity style={{ backgroundColor: '#5ac618', padding: 10, borderRadius: 5 }}>
+                        <TouchableOpacity style={{ backgroundColor: '#5ac618', padding: 10, borderRadius: 5, width:340 }}>
                           <Text style={{ fontSize: 15, textAlign: 'center', fontWeight: 'bold' }}>Chỉnh sửa thông tin</Text>
                         </TouchableOpacity>
+
                         )
                       )
                     )
                   }
+                  </View>
+                  <View style={{width:90}}>
+                  {this.state.userInfo.action_userID != this.state.datauser.id && this.state.userInfo.status_friend == 0?
+                  
+                  <TouchableOpacity onPress={() => this.onchat(this.state.userInfo.id)} style={{ backgroundColor: '#DFDFDF', padding: 10, borderRadius: 5 }}>
+                  <Text style={{ fontSize: 15, textAlign: 'center', fontWeight: 'bold' }}>nhắn tin</Text>
+                  </TouchableOpacity>
+                  : (this.state.userInfo.status_friend == 0 &&  this.state.userInfo.action_userID == this.state.datauser.id?
+                    
+                     <TouchableOpacity onPress={() => this.onchat(this.state.userInfo.id)} style={{ backgroundColor: '#DFDFDF', padding: 10, borderRadius: 5 }}>
+                     <Text style={{ fontSize: 15, textAlign: 'center', fontWeight: 'bold' }}>nhắn tin</Text>
+                   </TouchableOpacity>
+                    : (this.state.userInfo.status_friend == -1 && this.state.userInfo.id != this.state.datauser.id  ?
+                      <TouchableOpacity onPress={() => this.onchat(this.state.userInfo.id)} style={{ backgroundColor: '#DFDFDF', padding: 10, borderRadius: 5 }}>
+                        <Text style={{ fontSize: 15, textAlign: 'center', fontWeight: 'bold' }}>nhắn tin</Text>
+                      </TouchableOpacity>
+                      :(this.state.userInfo.status_friend == 1 && this.state.userInfo.id != this.state.datauser.id  ?
+                      <TouchableOpacity onPress={() => this.onchat(this.state.userInfo.id)} style={{ backgroundColor: '#DFDFDF', padding: 10, borderRadius: 5 }}>
+                        <Text style={{ fontSize: 15, textAlign: 'center', fontWeight: 'bold' }}>nhắn tin</Text>
+                      </TouchableOpacity>
+                      :
+                      null
 
+                      )
+                    )
+                  )
+                }
                 </View>
-                <View style={{ borderBottomColor: '#DFDFDF', borderBottomWidth: 1 }}>
+                        
+                </View>
+                <View style={{paddingLeft:10, paddingRight:10,paddingTop:2}}>
+                  <TouchableOpacity style={{ backgroundColor: '#DFDFDF', padding:10, borderRadius: 5 }} onPress={() => this.onListFriends(this.state.userInfo.id)}>
+                          <Text style={{ fontSize: 15, textAlign: 'center', fontWeight: 'bold' }}>Xem bạn bè</Text>
+                  </TouchableOpacity>
+                </View>
+                <View style={{padding:10}}>
+                <View style={{ borderBottomColor: '#DFDFDF', borderBottomWidth: 1, paddingBottom:5 }}>
                   <Text style={{ fontSize: 20 }}>Thông tin</Text>
                 </View>
-                <View style={{ marginLeft: 10, flexDirection: 'row', }}>
+                <View style={{ marginLeft: 10, flexDirection: 'row', paddingTop:10 }}>
                   <Image
                     source={icgender}
                     style={styles.imageStyle}
                   />
                   <Text style={{ fontSize: 20, paddingLeft: 5 }}>Giới tính: {this.state.userInfo.gender}</Text>
                 </View>
-                <View style={{ marginLeft: 10, flexDirection: 'row', }}>
+                <View style={{ marginLeft: 10, flexDirection: 'row',paddingTop:10 }}>
                   <Image
                     source={icdob}
                     style={styles.imageStyle}
                   />
                   <Text style={{ fontSize: 20, paddingLeft: 5 }}>Ngày sinh: {this.state.userInfo.doB}</Text>
                 </View>
-                <View style={{ marginLeft: 10, flexDirection: 'row', }}>
+                <View style={{ marginLeft: 10, flexDirection: 'row',paddingTop:10 }}>
                   <Image
                     source={icphone}
                     style={styles.imageStyle}
@@ -360,12 +410,13 @@ export class Profileorther extends Component {
                   <Text style={{ fontSize: 20, paddingLeft: 5 }}>Di động: {this.state.userInfo.phone}</Text>
                 </View>
 
-                <View style={{ marginLeft: 10, flexDirection: 'row', }}>
+                <View style={{ marginLeft: 10, flexDirection: 'row', paddingTop:10}}>
                   <Image
                     source={icemail}
                     style={styles.imageStyle}
                   />
                   <Text style={{ fontSize: 20, paddingLeft: 5 }}>Email: {this.state.userInfo.email}</Text>
+                </View>
                 </View>
               </>
             }
@@ -399,7 +450,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderBottomWidth: 2,
     borderBottomColor: '#DFDFDF',
-    height: 50
+    height: 50,
+    backgroundColor:'white'
   },
   container: {
     justifyContent: 'center',

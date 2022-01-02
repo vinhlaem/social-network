@@ -115,6 +115,7 @@ export class PostStatus extends Component {
 
 
     }
+    
     render() {
         let { image } = this.state;
         return (

@@ -10,6 +10,7 @@ import icheartcolor from '../../img/icheart.png'
 import icheartreact from '../../img/green.png'
 import iccomment from '../../img/comment.png'
 import ava from '../../img/ava.png'
+import messenger from '../../img/messenger.png'
 import GetPostAPI from '../../API/GetPost';
 import GetAuUser from '../../API/GetAuUser';
 import GetToken from '../../API/GetToken';
@@ -161,6 +162,10 @@ class Feed extends React.Component {
     this.props.navigation.navigate("Search")
 
   }
+  onMessenger = () => {
+    this.props.navigation.navigate("Messenger")
+
+  }
   onCmt = (postID) => {
     this.props.navigation.navigate("Comment",{
       postID: postID
@@ -232,9 +237,12 @@ class Feed extends React.Component {
               <Image style={{ height: 300, width: null }} source={{ uri: 'https://zbioggg.com/' + item.post_Images[0].image }} />
               : null
           }
-          <View style={{ padding: 10, borderBottomColor: '#DFDFDF', borderBottomWidth: 1, flexDirection: 'row', justifyContent: 'space-between', }}>
-            <Text>{item.like_qty}
-            </Text>
+          <View style={{ padding: 5, borderBottomColor: '#DFDFDF', borderBottomWidth: 1, flexDirection: 'row', justifyContent: 'space-between', }}>
+          <View style={{  flexDirection: 'row',  }}>
+            <Image style={{ height: 15, width: 15, marginTop: 3,paddingLeft:3,  backgroundColor: 'rgba(0,0,0,0)' }} source={icheartreact}/>
+            <Text style={{paddingLeft:3}}>{item.like_qty}</Text>
+          </View>
+            
             <Text>{item.cmt_qty} bình luận</Text>
           </View>
           <View style={styles.viewbtn1}>
@@ -269,10 +277,14 @@ class Feed extends React.Component {
           <Text style={{ fontSize: 25, color: '#5ac618', paddingLeft: 10, marginTop: 7 }}>
             ZBIOGGG
           </Text>
-
-          <TouchableOpacity onPress={this.onSearch} style={{ height: 40, width: 40, backgroundColor: '#DFDFDF', marginTop: 3, marginRight: 10, borderRadius: 100 }}>
-            <Image style={{ height: 35, width: 35, marginTop: 2, marginLeft: 2 }} source={icsearch} />
+          <View style={{flexDirection:'row'}}>
+          <TouchableOpacity onPress={this.onSearch} style={{ height: 40, width: 40, marginTop: 6, marginRight: 5, borderRadius: 100 }}>
+            <Image style={{ height: 35, width: 35, marginTop: 2, marginLeft: 2,borderRadius:100 }} source={icsearch} />
           </TouchableOpacity>
+          <TouchableOpacity onPress={this.onMessenger} style={{ height: 40, width: 40, marginTop: 3, marginRight: 10, borderRadius: 100 }}>
+            <Image style={{ height: 38, width: 38, marginTop: 2, marginLeft: 2,borderRadius:100 }} source={messenger} />
+          </TouchableOpacity>
+          </View>
         </View>
         <View style={{ flexDirection: 'row', height: 50, borderBottomColor: '#DFDFDF', borderBottomWidth: 1 }}>
           <TouchableOpacity onPress={this.onProfile} style={{ height: 40, width: 40, marginTop: 2, marginLeft: 10 }}>
