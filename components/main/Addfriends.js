@@ -278,13 +278,13 @@ export class Addfriends extends Component {
             )
         }
         return (
-            <View>
+            <View style={{marginTop:30}}>
                 <View style={styles.viewheader}>
                     <Text style={{ fontSize: 25, color: '#5ac618', paddingLeft: 10, marginTop: 7 }}>
                         ZBIOGG
                     </Text>
-                    <TouchableOpacity style={{ height: 40, width: 40, backgroundColor: '#DFDFDF', marginTop: 3, marginRight: 10, borderRadius: 100 }}>
-                        <Image style={{ height: 35, width: 35, marginTop: 2, marginLeft: 2 }} source={icsearch} />
+                    <TouchableOpacity style={{ height: 40, width: 40, marginTop: 3, marginRight: 10, borderRadius: 100 }}>
+                        <Image style={{ height: 35, width: 35, marginTop: 2, marginLeft: 2, borderRadius:100 }} source={icsearch} />
                     </TouchableOpacity>
                 </View>
               

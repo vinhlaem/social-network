@@ -39,18 +39,17 @@ export class App extends Component {
           <Stack.Screen name="Langding" component={LandingScreen}/>
           <Stack.Screen name="Login" component={LoginScreen}/>
           <Stack.Screen name="Register" component={RegisterScreen}/>
-          <Stack.Screen name="Home" component={HomeScreen}/>
+          <Stack.Screen name="Home" component={HomeScreen} options={{headerShown:false}}/>
           <Stack.Screen name="Profile" component={Profile}/>
           <Stack.Screen name="PostStatus" component={PostStatus} />
           <Stack.Screen name = "Search" component={Search}/>
           <Stack.Screen name = "Comment" component={Comment}/>
           <Stack.Screen name ="Repcomment" component={Repcomment}/>
-          <Stack.Screen name ="Profileorther" component={Profileorther}/>
+          <Stack.Screen name ="Profileorther" component={Profileorther} options={{headerShown:false}}/>
           <Stack.Screen name ="DetailPost" component={DetailPost}/>
           <Stack.Screen name ="ListFriends" component={ListFriends}/>
           <Stack.Screen name = "Messenger" component={Messenger}/>
-          <Stack.Screen name = "Chat" component={Chat}/>
-
+          <Stack.Screen name = "Chat" component={Chat} options={{headerShown:false}}/>
         </Stack.Navigator>
       </NavigationContainer>
       

@@ -83,7 +83,7 @@ export class notification extends Component {
             )
         }
         return (
-            <View>
+            <View style={{marginTop:30}}>
                 <View>
                     <Text style={{fontSize:20,fontWeight:'bold', padding:10}}>Thông Báo</Text>
                 </View>

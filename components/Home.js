@@ -23,20 +23,21 @@ export class Home extends Component {
                     }} /> 
                      <Tab.Screen name="Addfriends" component={AddfriendsScreen}
                     options={{
-
+                    
                         tabBarIcon: ({ color, size }) => (
                             <MaterialCommunityIcons name="account-plus" color={color} size={26} />
                         ),
                     }} />
                      <Tab.Screen  name="notification" component={notificationScreen}
                     options={{
-                    
+                        
                         tabBarIcon: ({ color, size }) => (
                             <MaterialCommunityIcons name="bell" color={color} size={26} />
                         ),
                     }} />
                     <Tab.Screen  name="Menu" component={MenuScreen}
                     options={{
+                        
                         tabBarIcon: ({ color, size }) => (
                             <MaterialCommunityIcons name="menu" color={color} size={26} />
                         ),

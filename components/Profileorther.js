@@ -13,6 +13,7 @@ import UrlAPI from '../UrlAPI';
 import GetToken from '../API/GetToken';
 import GetAuUser from '../API/GetAuUser';
 import icheartreact from '../img/green.png'
+import icback from '../img/back.png'
 
 
 class FlatListItem extends Component {
@@ -271,15 +272,17 @@ export class Profileorther extends Component {
     this.props.navigation.navigate("Chat",{
         userID:id})
   }
+  onback = () => {
+    this.props.navigation.navigate("Home")
+}
 
   render() {
     return (
-      <View>
-        <View>
-          <FlatList
-            ListHeaderComponent={
-              <>
-                <View style={styles.viewheader}>
+      <View style={{paddingBottom:160}}>
+        <View style={styles.viewheader}>
+                <TouchableOpacity onPress={this.onback} style={{ marginLeft: 10, backgroundColor: 'transparent' }}>
+                        <Image style={{ height: 20, width: 20, marginTop: 10, marginLeft: 2, }} source={icback} />
+                    </TouchableOpacity>
                   <Text style={{ fontSize: 20, color: '#5ac618', paddingLeft: 10, marginTop: 10 }}>
                     {this.state.userInfo.lastName} {this.state.userInfo.firstName}
                   </Text>
@@ -287,6 +290,11 @@ export class Profileorther extends Component {
                     <Image style={{ height: 35, width: 35, marginTop: 2, marginLeft: 2, borderRadius:100 }} source={icsearch} />
                   </TouchableOpacity>
                 </View>
+        <View>
+          <FlatList
+            ListHeaderComponent={
+              <>
+                
                 <View style={styles.container}>
                   {
                     this.state.userInfo.img_cover ?
@@ -384,7 +392,7 @@ export class Profileorther extends Component {
                           <Text style={{ fontSize: 15, textAlign: 'center', fontWeight: 'bold' }}>Xem bạn bè</Text>
                   </TouchableOpacity>
                 </View>
-                <View style={{padding:10}}>
+                <View style={{padding:10, borderBottomColor:'#DFDFDF' ,borderBottomWidth:10}}>
                 <View style={{ borderBottomColor: '#DFDFDF', borderBottomWidth: 1, paddingBottom:5 }}>
                   <Text style={{ fontSize: 20 }}>Thông tin</Text>
                 </View>
@@ -451,7 +459,9 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     borderBottomColor: '#DFDFDF',
     height: 50,
-    backgroundColor:'white'
+    backgroundColor:'white',
+    marginTop:30,
+    
   },
   container: {
     justifyContent: 'center',

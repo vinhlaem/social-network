@@ -225,8 +225,13 @@ class Feed extends React.Component {
     _renderItem = ({ item, index }) => {
       return (
         <View style={{ flex: 1, borderBottomColor: '#DFDFDF', borderBottomWidth: 5 }}>
+           
           <TouchableOpacity onPress={()=>this.onProfileother(item.userID)} style={{ flexDirection: 'row', padding:5 }}>
+          {
+          item.userAvt !=null ?
             <Image style={{ height: 35, width: 35, marginTop: 2, marginLeft: 2, borderRadius: 100 }} source={{ uri: 'https://zbioggg.com/' + item.userAvt }} />
+            :<Image style={{ height: 35, width: 35, marginTop: 2, marginLeft: 2, borderRadius: 100 }} source={{ uri: 'https://zbioggg.com/' + 'img/avt/avt-default.png' }} />
+          }
             <Text style={{ paddingLeft: 10, paddingTop: 10 }}>
               {item.userfullname}
             </Text>
@@ -272,7 +277,7 @@ class Feed extends React.Component {
     }
     return (
 
-      <View style={{ backgroundColor: 'white', paddingBottom: 300 }}>
+      <View style={{ backgroundColor: 'white', paddingBottom: 300, marginTop:30 }}>
         <View style={styles.viewheader}>
           <Text style={{ fontSize: 25, color: '#5ac618', paddingLeft: 10, marginTop: 7 }}>
             ZBIOGGG
@@ -289,7 +294,7 @@ class Feed extends React.Component {
         <View style={{ flexDirection: 'row', height: 50, borderBottomColor: '#DFDFDF', borderBottomWidth: 1 }}>
           <TouchableOpacity onPress={this.onProfile} style={{ height: 40, width: 40, marginTop: 2, marginLeft: 10 }}>
             {
-              this.state.datauser.img_avt ?
+              this.state.datauser.img_avt !=null ?
                 <Image style={{ height: 40, width: 40, marginTop: 3, marginLeft: 2, borderRadius: 100 }} source={{ uri: 'https://zbioggg.com/' + this.state.datauser.img_avt }} />
                 :
                 <Image style={{ height: 40, width: 40, marginTop: 3, marginLeft: 2, borderRadius: 100 }} source={{ uri: 'https://zbioggg.com/' + 'img/avt/avt-default.png' }} />

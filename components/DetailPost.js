@@ -16,6 +16,7 @@ export class DetailPost extends Component {
             datapost: [],
             iconheart: icheart,
             colortext: 'black',
+            dataimage:[]
         });
     }
     componentDidMount() {
@@ -57,7 +58,9 @@ export class DetailPost extends Component {
                     console.log(response);
                     this.setState({
                         datapost: response.data[0],
+                        dataimage:response.data[0].post_Images
                     });
+                    console.log(this.state.dataimage)
                 } else {
                     alert("loi");
                 }
@@ -77,7 +80,7 @@ export class DetailPost extends Component {
                 </TouchableOpacity >
                 <Text style={{ paddingLeft: 10 }}>{this.state.datapost.post_Content}</Text>
                 {
-                    this.state.datapost.post_Images ?
+                    this.state.dataimage.length !=0 ?
                         <Image style={{ height: 300, width: null }} source={{ uri: 'https://zbioggg.com/' + this.state.datapost.post_Images[0].image }} />
                         : null
                 }
