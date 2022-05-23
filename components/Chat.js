@@ -202,9 +202,6 @@ export class Chat extends Component {
                     alert("error" + error);
                 })
         }
-
-
-
     }
 
     render() {

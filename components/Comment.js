@@ -24,9 +24,7 @@ export class Comment extends Component {
     }
    
     componentDidMount() {
-        
         this.Getcomment();
-
     }
 
     Getcomment = async () => {
@@ -46,13 +44,11 @@ export class Comment extends Component {
         )
             .then((response) => response.json())
             .then((response) => {
-
                 if ((response.success)) {
                     console.log(response);
                     this.setState({
                         datacmts: response.cmts,
                         cmt: response.cmts_qty
-                        
                     });
                 } else {
                     alert("loi");

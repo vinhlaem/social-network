@@ -14,6 +14,7 @@ import messenger from '../../img/messenger.png'
 import GetPostAPI from '../../API/GetPost';
 import GetAuUser from '../../API/GetAuUser';
 import GetToken from '../../API/GetToken';
+import {PlaceholderContainer, Placeholder } from 'react-native-loading-placeholder';
 
 var token = '';
 GetToken().then(t => {
@@ -239,7 +240,9 @@ class Feed extends React.Component {
           <Text style={{ paddingLeft: 10 }}>{item.post_Content}</Text>
           {
             item.post_Images.length != 0 ?
-              <Image style={{ height: 300, width: null }} source={{ uri: 'https://zbioggg.com/' + item.post_Images[0].image }} />
+            <View>
+              <Image style={{ height: 400, width: null }} source={{ uri: 'https://zbioggg.com/' + item.post_Images[0].image }} />
+            </View>  
               : null
           }
           <View style={{ padding: 5, borderBottomColor: '#DFDFDF', borderBottomWidth: 1, flexDirection: 'row', justifyContent: 'space-between', }}>
@@ -291,6 +294,7 @@ class Feed extends React.Component {
           </TouchableOpacity>
           </View>
         </View>
+
         <View style={{ flexDirection: 'row', height: 50, borderBottomColor: '#DFDFDF', borderBottomWidth: 1 }}>
           <TouchableOpacity onPress={this.onProfile} style={{ height: 40, width: 40, marginTop: 2, marginLeft: 10 }}>
             {
@@ -305,7 +309,6 @@ class Feed extends React.Component {
           <TouchableOpacity onPress={this.onPoststatus} style={{ borderWidth: 1, borderRadius: 50, padding: 10, width: 300, height: 40, marginTop: 5, marginLeft: 5, borderColor: "#DFDFDF" }}>
             <Text style={{ color: "#a9a9a9" }}>What are you thinking???</Text>
           </TouchableOpacity>
-
         </View>
         <View style={styles.viewbtn} >
           <TouchableOpacity style={styles.btn}>

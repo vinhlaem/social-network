@@ -33,7 +33,7 @@ export class Login extends Component {
         else{
             var LoginAPIURL=UrlAPI.url+"login ";
             var headers={'Accept':'application/json',
-                           'Content-Type':'application/json' };
+                         'Content-Type':'application/json' };
             var Data={
                 'username':username,
                 'password':password
