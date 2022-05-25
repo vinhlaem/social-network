@@ -85,7 +85,6 @@ export class Register extends Component {
             <View style={styles.ViewStyle}>
 
                 <Text style={styles.title}>ZBIO</Text>  
-                <ScrollView>
                 <View style={styles.sectionStyle}>
                     <Image
                     source={
@@ -220,11 +219,7 @@ export class Register extends Component {
                     secureTextEntry={true}
                     />
                     </View>
-               
                 
-                    
-                
-                </ScrollView>
                 <TouchableOpacity style={styles.btn} onPress={this.onSignUp}>
                     <Text style={styles.text} >
                         SignUp
@@ -241,7 +236,7 @@ const styles=StyleSheet.create({
     {
         flex:1,
         padding:20,
-        marginTop:10,
+        marginTop:70,
     },
 
     txtStyle:

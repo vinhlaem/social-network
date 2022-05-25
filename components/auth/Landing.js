@@ -71,7 +71,7 @@ title:{
         return (
           <View style={styles.container}>
           <Text style={styles.title}>ZBIO</Text>
-          <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate("Register")}>
+          <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate("Register")}>
             <Text style={styles.text}>
                 Register
             </Text>

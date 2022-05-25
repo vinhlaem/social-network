@@ -190,8 +190,7 @@ export class Search extends Component {
     }
 
     return (
-      <View>
-
+      <View style={{backgroundColor:'white'}}>
         <View>
           <FlatList
             ListHeaderComponent={
@@ -207,7 +206,7 @@ export class Search extends Component {
                     style={{ borderWidth: 1, width: 300, marginLeft: 5, borderRadius: 10, padding: 5,margin:10, borderColor: '#28a745' }}
                   />
                   <TouchableOpacity onPress={this.onSearch} style={{ height: 40, width: 40, marginTop: 10, marginRight: 10, borderRadius: 100 }}>
-                    <Image style={{ height: 40, width: 40, marginTop: 2, marginLeft: 2, borderRadius:100, backgroundColor: 'rgba(0,0,0,0)' }} source={icsearch} />
+                    <Image style={{ height: 40, width: 40, marginTop: 2, marginLeft: 2, borderRadius:100 }} source={icsearch} />
                   </TouchableOpacity>
                 </View>
                 {this.state.success===true&&

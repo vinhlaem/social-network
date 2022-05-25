@@ -147,21 +147,21 @@ export class Profile extends Component {
                         source={icgender}
                         style={styles.imageStyle}
                       />
-                      <Text style={{ fontSize: 20, paddingLeft: 5 }}>Giới tính: {this.state.userInfo.gender}</Text>
+                      <Text style={{ fontSize: 15, paddingLeft: 5 }}>Giới tính: {this.state.userInfo.gender}</Text>
                     </View>
                     <View style={{ marginLeft: 10, flexDirection: 'row', }}>
                       <Image
                         source={icdob}
                         style={styles.imageStyle}
                       />
-                      <Text style={{ fontSize: 20, paddingLeft: 5 }}>Ngày sinh: {this.state.userInfo.doB}</Text>
+                      <Text style={{ fontSize: 15, paddingLeft: 5 }}>Ngày sinh: {this.state.userInfo.doB}</Text>
                     </View>
                     <View style={{ marginLeft: 10, flexDirection: 'row', }}>
                       <Image
                         source={icphone}
                         style={styles.imageStyle}
                       />
-                      <Text style={{ fontSize: 20, paddingLeft: 5 }}>Di động: {this.state.userInfo.phone}</Text>
+                      <Text style={{ fontSize: 15, paddingLeft: 5 }}>Di động: {this.state.userInfo.phone}</Text>
                     </View>
 
                     <View style={{ marginLeft: 10, flexDirection: 'row', }}>
@@ -169,7 +169,7 @@ export class Profile extends Component {
                         source={icemail}
                         style={styles.imageStyle}
                       />
-                      <Text style={{ fontSize: 20, paddingLeft: 5 }}>Email: {this.state.userInfo.email}</Text>
+                      <Text style={{ fontSize: 15, paddingLeft: 5 }}>Email: {this.state.userInfo.email}</Text>
                     </View>
                   </>
                 }

@@ -126,7 +126,7 @@ export class PostStatus extends Component {
                 >
                     <View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 10, borderBottomWidth: 1, borderBottomColor: '#DFDFDF' }}>
-                            <Text style={{ fontSize: 16 }} >Tạo bài viết</Text>
+                            <Text style={{ fontSize: 18, fontWeight: 'bold' }} >Tạo bài viết</Text>
                             <TouchableOpacity onPress={this.onPost} style={{ width: 70, }}>
                                 <Text style={{ fontSize: 16, textAlign: 'center' }}>Đăng</Text>
                             </TouchableOpacity>
@@ -140,12 +140,12 @@ export class PostStatus extends Component {
                                         <Image style={{ height: 50, width: 50, borderRadius: 100 }} source={{ uri: 'https://zbioggg.com/' + 'img/avt/avt-default.png' }} />
                                 }
                             </TouchableOpacity>
-                            <Text style={{ fontWeight: 'bold', paddingLeft: 10 }}>{this.state.datauser.lastName} {this.state.datauser.firstName}</Text>
+                            <Text style={{ fontWeight: 'bold', paddingLeft: 10, marginTop:12, fontSize:15 }}>{this.state.datauser.lastName} {this.state.datauser.firstName}</Text>
                         </View>
-                        <View style={{ height: 400, borderBottomWidth: 1 }}>
+                        <View style={{ height: 300, borderBottomWidth: 1 }}>
                             <TextInput
                                 {...this.props}
-                                placeholder={"What are you thinking!!!!"}
+                                placeholder={"Bạn đang cảm thấy thế nào!!!!"}
                                 placeholderTextColor={"#a9a9a9"}
                                 multiline={true}
                                 underlineColorAndroid="transparent"

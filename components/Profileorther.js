@@ -283,9 +283,13 @@ export class Profileorther extends Component {
                 <TouchableOpacity onPress={this.onback} style={{ marginLeft: 10, backgroundColor: 'transparent' }}>
                         <Image style={{ height: 20, width: 20, marginTop: 10, marginLeft: 2, }} source={icback} />
                     </TouchableOpacity>
+                  {this.state.userInfo.id == this.state.datauser.id?
+                  <Text style={{ fontSize: 20, color: '#5ac618', paddingLeft: 10, marginTop: 10 }}>Trang cá nhân</Text>
+                  :
                   <Text style={{ fontSize: 20, color: '#5ac618', paddingLeft: 10, marginTop: 10 }}>
                     {this.state.userInfo.lastName} {this.state.userInfo.firstName}
                   </Text>
+                  }
                   <TouchableOpacity style={{ height: 40, width: 40,  marginTop: 3, marginRight: 10, borderRadius: 100 }}>
                     <Image style={{ height: 35, width: 35, marginTop: 2, marginLeft: 2, borderRadius:100 }} source={icsearch} />
                   </TouchableOpacity>
@@ -392,7 +396,7 @@ export class Profileorther extends Component {
                           <Text style={{ fontSize: 15, textAlign: 'center', fontWeight: 'bold' }}>Xem bạn bè</Text>
                   </TouchableOpacity>
                 </View>
-                <View style={{padding:10, borderBottomColor:'#DFDFDF' ,borderBottomWidth:10}}>
+                <View style={{padding:10, borderBottomColor:'#DFDFDF' ,borderBottomWidth:10,backgroundColor:'#fff'}}>
                 <View style={{ borderBottomColor: '#DFDFDF', borderBottomWidth: 1, paddingBottom:5 }}>
                   <Text style={{ fontSize: 20 }}>Thông tin</Text>
                 </View>
@@ -401,21 +405,21 @@ export class Profileorther extends Component {
                     source={icgender}
                     style={styles.imageStyle}
                   />
-                  <Text style={{ fontSize: 20, paddingLeft: 5 }}>Giới tính: {this.state.userInfo.gender}</Text>
+                  <Text style={{ fontSize: 15, paddingLeft: 5 }}>Giới tính: {this.state.userInfo.gender}</Text>
                 </View>
                 <View style={{ marginLeft: 10, flexDirection: 'row',paddingTop:10 }}>
                   <Image
                     source={icdob}
                     style={styles.imageStyle}
                   />
-                  <Text style={{ fontSize: 20, paddingLeft: 5 }}>Ngày sinh: {this.state.userInfo.doB}</Text>
+                  <Text style={{ fontSize: 15, paddingLeft: 5 }}>Ngày sinh: {this.state.userInfo.doB}</Text>
                 </View>
                 <View style={{ marginLeft: 10, flexDirection: 'row',paddingTop:10 }}>
                   <Image
                     source={icphone}
                     style={styles.imageStyle}
                   />
-                  <Text style={{ fontSize: 20, paddingLeft: 5 }}>Di động: {this.state.userInfo.phone}</Text>
+                  <Text style={{ fontSize: 15, paddingLeft: 5 }}>Di động: {this.state.userInfo.phone}</Text>
                 </View>
 
                 <View style={{ marginLeft: 10, flexDirection: 'row', paddingTop:10}}>
@@ -423,7 +427,7 @@ export class Profileorther extends Component {
                     source={icemail}
                     style={styles.imageStyle}
                   />
-                  <Text style={{ fontSize: 20, paddingLeft: 5 }}>Email: {this.state.userInfo.email}</Text>
+                  <Text style={{ fontSize: 15, paddingLeft: 5 }}>Email: {this.state.userInfo.email}</Text>
                 </View>
                 </View>
               </>
@@ -474,7 +478,8 @@ const styles = StyleSheet.create({
   imageStyle: {
     resizeMode: "center",
     height: 25,
-    width: 25
+    width: 25,
+
   },
   btn: {
     flexDirection: 'row',

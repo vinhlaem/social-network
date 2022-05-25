@@ -37,8 +37,8 @@ export class App extends Component {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="Langding" component={LandingScreen}/>
-          <Stack.Screen name="Login" component={LoginScreen}/>
-          <Stack.Screen name="Register" component={RegisterScreen}/>
+          <Stack.Screen name="Login" component={LoginScreen} options={{headerShown:false}}/>
+          <Stack.Screen name="Register" component={RegisterScreen} options={{headerShown:false}}/>
           <Stack.Screen name="Home" component={HomeScreen} options={{headerShown:false}}/>
           <Stack.Screen name="Profile" component={Profile}/>
           <Stack.Screen name="PostStatus" component={PostStatus} />
@@ -52,8 +52,8 @@ export class App extends Component {
           <Stack.Screen name = "Chat" component={Chat} options={{headerShown:false}}/>
         </Stack.Navigator>
       </NavigationContainer>
-      
-      
+
+
     );
     
   }

@@ -266,7 +266,7 @@ class Feed extends React.Component {
                 <Text style={{ marginTop: 2, marginLeft: 5, color: 'green' }}>Thích</Text>
               }
             </TouchableOpacity>
-            <TouchableOpacity onPress={this.onCmt} style={styles.btn1}>
+            <TouchableOpacity onPress={() => this.onCmt(item.postID)} style={styles.btn1}>
               <Image style={{ height: 20, width: 20, marginTop: 3,resizeMode:"center", marginLeft: 2 }} source={iccomment} />
               <Text style={{ marginTop: 2, marginLeft: 5 }}> Bình luận</Text>
             </TouchableOpacity>
