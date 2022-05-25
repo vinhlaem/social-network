@@ -110,7 +110,7 @@ export class Chat extends Component {
                 if ((response)) {
 
                     this.setState({
-                        listcontentmess: this.state.listcontentmess.concat(response.message),
+                        listcontentmess: this.state.listcontentmess.concat(response.message.reverse()),
                         datauserchat: response.user
                     });
                 } else {

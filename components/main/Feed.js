@@ -237,7 +237,7 @@ class Feed extends React.Component {
               {item.userfullname}
             </Text>
           </TouchableOpacity >
-          <Text style={{ paddingLeft: 10 }}>{item.post_Content}</Text>
+          <Text style={{ padding: 10 }}>{item.post_Content}</Text>
           {
             item.post_Images.length != 0 ?
             <View>
@@ -255,22 +255,20 @@ class Feed extends React.Component {
           </View>
           <View style={styles.viewbtn1}>
             <TouchableOpacity onPress={() => this.onLike(index, item.postID)} style={styles.btn}>
-
-              {item.liked == 0 ?
-                <Image style={{ height: 30, width: 30, marginTop: 3, marginLeft: 2, backgroundColor: 'rgba(0,0,0,0)' }} source={this.state.iconheart} />
+            {item.liked == 0 ?
+                <Image style={{ height: 35, width: 35,resizeMode:"center", marginTop: 3, marginLeft: 2, backgroundColor: 'rgba(0,0,0,0)' }} source={this.state.iconheart} />
                 :
-                <Image style={{ height: 30, width: 30, marginTop: 3, marginLeft: 2, backgroundColor: 'rgba(0,0,0,0)' }} source={icheartreact} />
+                <Image style={{ height: 25, width: 25,resizeMode:"center", marginTop: 3, marginLeft: 2, backgroundColor: 'rgba(0,0,0,0)' }} source={icheartreact} />
               }
               {item.liked == 0 ?
-                <Text style={{ marginTop: 7, marginLeft: 5, color: this.state.colortext }}>Thích</Text>
+                <Text style={{ marginTop: 2, marginLeft: 1, color: this.state.colortext }}>Thích</Text>
                 :
-                <Text style={{ marginTop: 7, marginLeft: 5, color: 'green' }}>Thích</Text>
+                <Text style={{ marginTop: 2, marginLeft: 5, color: 'green' }}>Thích</Text>
               }
-
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.onCmt(item.postID)} style={styles.btn1}>
-              <Image style={{ height: 25, width: 25, marginTop: 3, marginLeft: 2 }} source={iccomment} />
-              <Text style={{ marginTop: 7, marginLeft: 5 }}> Bình luận</Text>
+            <TouchableOpacity onPress={this.onCmt} style={styles.btn1}>
+              <Image style={{ height: 20, width: 20, marginTop: 3,resizeMode:"center", marginLeft: 2 }} source={iccomment} />
+              <Text style={{ marginTop: 2, marginLeft: 5 }}> Bình luận</Text>
             </TouchableOpacity>
           </View>
 
@@ -384,7 +382,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     borderBottomWidth: 5,
     borderBottomColor: '#DFDFDF',
-    height:50
+    height:40
 
   },
   viewheader: {
