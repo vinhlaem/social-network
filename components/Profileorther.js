@@ -16,53 +16,7 @@ import icheartreact from '../img/green.png'
 import icback from '../img/back.png'
 
 
-class FlatListItem extends Component {
-  render() {
-    return (
-      <View style={{ flex: 1, borderBottomColor: '#DFDFDF', borderBottomWidth: 5 }}>
-        <TouchableOpacity style={{ flexDirection: 'row', padding: 10, paddingTop: 10 }}>
-          <Image style={{ height: 35, width: 35, marginTop: 2, marginLeft: 2, borderRadius: 100 }} source={{ uri: 'https://zbioggg.com/' + this.props.item.userAvt }} />
-          <Text style={{ paddingLeft: 10, paddingTop: 10 }}>
-            {this.props.item.userfullname}
-          </Text>
-        </TouchableOpacity >
-        <Text style={{ paddingLeft: 10 }}>{this.props.item.post_Content}</Text>
-        {
-          this.props.item.post_Images.length != 0 ?
-            <Image style={{ height: 300, width: null }} source={{ uri: 'https://zbioggg.com/' + this.props.item.post_Images[0].image }} />
-            : null
-        }
 
-        <View style={{ padding: 5, borderBottomColor: '#DFDFDF', borderBottomWidth: 1, flexDirection: 'row', justifyContent: 'space-between', }}>
-          <View style={{  flexDirection: 'row',  }}>
-            <Image style={{ height: 15, width: 15, marginTop: 3, marginLeft: 2, backgroundColor: 'rgba(0,0,0,0)' }} source={icheartreact}/>
-            <Text style={{paddingLeft:3}} >{this.props.item.like_qty}</Text>
-          </View>
-          <Text>{this.props.item.cmt_qty} bình luận</Text>
-        </View>
-        <View style={styles.viewbtn1}>
-          <TouchableOpacity style={styles.btn}>
-          {this.props.item.liked == 0 ?
-                <Image style={{ height: 30, width: 30, marginTop: 3, marginLeft: 2, backgroundColor: 'rgba(0,0,0,0)' }} source={icheart} />
-                :
-                <Image style={{ height: 30, width: 30, marginTop: 3, marginLeft: 2, backgroundColor: 'rgba(0,0,0,0)' }} source={icheartreact} />
-              }
-              {this.props.item.liked == 0 ?
-                <Text style={{ marginTop: 7, marginLeft: 5, color: this.props.colortext }}>Thích</Text>
-                :
-                <Text style={{ marginTop: 7, marginLeft: 5, color: 'green' }}>Thích</Text>
-              }
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.btn1}>
-            <Image style={{ height: 25, width: 25, marginTop: 3, marginLeft: 2 }} source={iccomment} />
-            <Text style={{ marginTop: 7, marginLeft: 5 }}> Bình luận</Text>
-          </TouchableOpacity>
-        </View>
-
-      </View>
-    )
-  }
-}
 var token = '';
 GetToken().then(t => {
   token = t;
@@ -83,6 +37,7 @@ export class Profileorther extends Component {
       datauser:{},
       colortext: 'black',
       iconheart: icheart,
+      backgroundColor: 'white',
 
     });
   }
@@ -275,8 +230,109 @@ export class Profileorther extends Component {
   onback = () => {
     this.props.navigation.navigate("Home")
 }
+onLike = (index, postID) => {
+  this.state.userPosts[index].liked = !this.state.userPosts[index].liked;
+  this.setState({
+    userPosts: this.state.userPosts
+  })
+  var idpost = postID;
+  var LikesAPIURL = UrlAPI.url + "likes";
+  var headers = {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer ' + token
+  }
+  var Data = {
+    'postID': idpost,
+  };
+  fetch(LikesAPIURL,
+    {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify(Data)
+    }
+  )
+    .then((response) => response.json())
+    .then((response) => {
+      if (response.message == 'liked') {
+        this.state.userPosts[index].liked = 1;
+        this.state.userPosts[index].like_qty += 1;
+        this.setState({
+          userPosts: this.state.userPosts
+        })
+      } else if(response.message=='disliked') {
+        this.state.userPosts[index].liked = 0;
+        this.state.userPosts[index].like_qty -= 1;
+        this.setState({
+          userPosts: this.state.userPosts
+        })
+      }
+
+    })
+
+    .catch((error) => {
+      alert("error" + error);
+    })
+
+  //   if(!this.state.pressed){
+  //     this.setState({ pressed: true,colortext: 'red',iconheart:icheartreact});
+  //  } else {
+  //    this.setState({ pressed: false, colortext: 'black',iconheart:icheart});
+  //  }
+}
+
+onCmt = (postID) => {
+  this.props.navigation.navigate("Comment",{
+    postID: postID
+  })
+}
 
   render() {
+    _renderItem= ({ item, index }) =>{
+      return (
+        <View style={{ flex: 1, borderBottomColor: '#DFDFDF', borderBottomWidth: 5 }}>
+          <TouchableOpacity style={{ flexDirection: 'row', padding: 10, paddingTop: 10 }}>
+            <Image style={{ height: 35, width: 35, marginTop: 2, marginLeft: 2, borderRadius: 100 }} source={{ uri: 'https://zbioggg.com/' + item.userAvt }} />
+            <Text style={{ paddingLeft: 10, paddingTop: 10, fontWeight:"bold" }}>
+              {item.userfullname}
+            </Text>
+          </TouchableOpacity >
+          <Text style={{ paddingLeft: 10 }}>{item.post_Content}</Text>
+          {
+            item.post_Images.length != 0 ?
+              <Image style={{ height: 300, width: null }} source={{ uri: 'https://zbioggg.com/' + item.post_Images[0].image }} />
+              : null
+          }
+    
+          <View style={{ padding: 5, borderBottomColor: '#DFDFDF', borderBottomWidth: 1, flexDirection: 'row', justifyContent: 'space-between', }}>
+            <View style={{  flexDirection: 'row',  }}>
+              <Image style={{ height: 15, width: 15, marginTop: 3, marginLeft: 2, backgroundColor: 'rgba(0,0,0,0)' }} source={icheartreact}/>
+              <Text style={{paddingLeft:3}} >{item.like_qty}</Text>
+            </View>
+            <Text>{item.cmt_qty} bình luận</Text>
+          </View>
+          <View style={styles.viewbtn1}>
+              <TouchableOpacity onPress={() => this.onLike(index, item.postID)} style={styles.btn}>
+              {item.liked == 0 ?
+                  <Image style={{ height: 35, width: 35,resizeMode:"center", marginTop: 3, marginLeft: 2, backgroundColor: 'rgba(0,0,0,0)' }} source={icheart} />
+                  :
+                  <Image style={{ height: 25, width: 25,resizeMode:"center", marginTop: 3, marginLeft: 2, backgroundColor: 'rgba(0,0,0,0)' }} source={icheartreact} />
+                }
+                {item.liked == 0 ?
+                  <Text style={{ marginTop: 2, marginLeft: 1, color: this.state.colortext }}>Thích</Text>
+                  :
+                  <Text style={{ marginTop: 2, marginLeft: 5, color: 'green' }}>Thích</Text>
+                }
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => this.onCmt(item.postID)} style={styles.btn1}>
+                <Image style={{ height: 20, width: 20, marginTop: 3,resizeMode:"center", marginLeft: 2 }} source={iccomment} />
+                <Text style={{ marginTop: 2, marginLeft: 5 }}> Bình luận</Text>
+              </TouchableOpacity>
+            </View>
+    
+        </View>
+      )
+    }
     return (
       <View style={{paddingBottom:160}}>
         <View style={styles.viewheader}>
@@ -436,12 +492,7 @@ export class Profileorther extends Component {
             style={{ flex: 0 }}
             ref={"flatlist"}
             data={this.state.userPosts}
-            renderItem={({ item, index }) => {
-              return (
-                <FlatListItem item={item} index={index} parentFlatList={this}>
-                </FlatListItem>
-              );
-            }}
+            renderItem={_renderItem}
             keyExtractor={(item, index) => index.toString()}
           >
           </FlatList>
